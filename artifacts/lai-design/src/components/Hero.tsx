@@ -2,6 +2,10 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowUpRight, DraftingCompass, HardHat, Map } from "lucide-react";
 
+import innovationPrep from "@assets/Innovation-Preparatory-Academy_1773411287414.jpg";
+import arthrexAMIE from "@assets/Arthrex-AMIE_1773411287409.jpg";
+import hollywoodAcademy from "@assets/Hollywood-Academy-Of-Arts-Sciences_1773411287413.jpg";
+
 const companies = [
   {
     name: "LAI Design",
@@ -53,19 +57,8 @@ export function Hero() {
             <h1 className="font-display text-[clamp(4.5rem,12vw,11rem)] leading-[0.82] text-white">
               LAI<br />Design
             </h1>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-xl lg:ml-auto"
-          >
-            <p className="font-sans text-xl leading-9 text-white/76 md:text-2xl md:leading-10">
+            <p className="mt-8 max-w-xl font-sans text-lg leading-8 text-white/72 md:text-xl md:leading-9">
               Architectural design for commercial, education, civic, industrial, and medical manufacturing projects.
-            </p>
-            <p className="mt-7 font-sans text-sm leading-7 text-white/52">
-              LAI Design is one part of a connected company family. When a project needs delivery or civil engineering support, LAI Construction and LAI Civil are one click away.
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -80,6 +73,39 @@ export function Hero() {
                 </span>
               </Link>
             </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-6 gap-3 lg:ml-auto lg:w-full lg:max-w-xl"
+            aria-label="Selected LAI Design work"
+          >
+            <div className="col-span-6 overflow-hidden border border-white/14 bg-white/5">
+              <img
+                src={innovationPrep}
+                alt="Innovation Preparatory Academy"
+                className="h-[260px] w-full object-cover grayscale-[25%] md:h-[340px] lg:h-[410px]"
+              />
+            </div>
+            <div className="col-span-3 overflow-hidden border border-white/14 bg-white/5">
+              <img
+                src={arthrexAMIE}
+                alt="Arthrex AMIE"
+                className="h-28 w-full object-cover grayscale-[25%] md:h-36"
+              />
+            </div>
+            <div className="col-span-3 overflow-hidden border border-white/14 bg-white/5">
+              <img
+                src={hollywoodAcademy}
+                alt="Hollywood Academy of Arts and Sciences"
+                className="h-28 w-full object-cover grayscale-[25%] md:h-36"
+              />
+            </div>
+            <p className="col-span-6 font-sans text-[10px] uppercase tracking-[0.28em] text-white/44">
+              Selected education and medical manufacturing work
+            </p>
           </motion.div>
         </div>
 

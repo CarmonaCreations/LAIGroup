@@ -9,7 +9,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 
 import innovationPrep from "@assets/Innovation-Preparatory-Academy_1773411287414.jpg";
 import arthrexAMIE from "@assets/Arthrex-AMIE_1773411287409.jpg";
-import miromarLakes from "@assets/Miromar-Lakes_1773411287414.jpg";
+import hollywoodAcademy from "@assets/Hollywood-Academy-Of-Arts-Sciences_1773411287413.jpg";
 import arthrexAMISC from "@assets/Arthrex-AMISC_1773411287410.jpg";
 
 const featured = [
@@ -32,13 +32,13 @@ const featured = [
     description: "Programming and design for a landmark medical manufacturing campus supporting surgical education, logistics, and high-performance production space.",
   },
   {
-    title: "Miromar Lakes",
-    type: "Residential / Miromar Lakes, FL",
-    image: miromarLakes,
-    cost: "$1.4M",
-    size: "3,600 sq ft",
-    completed: "April 2019",
-    description: "A design/build residential remodel shaped around refined materials, lakefront views, and a more intentional daily living experience.",
+    title: "Hollywood Academy of Arts & Sciences",
+    type: "Education / Hollywood, FL",
+    image: hollywoodAcademy,
+    cost: "$14M",
+    size: "110,000 gsf",
+    completed: "August 2012",
+    description: "A LEED registered four-story school campus with classrooms, administration, multi-purpose dining, and rooftop outdoor learning areas.",
   },
   {
     title: "Arthrex AMISC",
@@ -69,7 +69,7 @@ const process = [
   },
 ];
 
-const typologies = ["Education", "Medical Manufacturing", "Commercial", "Residential", "Civic", "Industrial"];
+const typologies = ["Education", "Medical Manufacturing", "Commercial", "Civic", "Industrial", "Workplace"];
 
 export default function Home() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
@@ -82,7 +82,7 @@ export default function Home() {
           name="description"
           content="LAI Design is the architectural design studio within the LAI family of companies, connecting design, construction, and civil expertise across Florida and beyond."
         />
-        <link rel="canonical" href="https://laigroup.com/" />
+        <link rel="canonical" href="https://laidesignassoc.com/" />
       </Helmet>
 
       <Nav />

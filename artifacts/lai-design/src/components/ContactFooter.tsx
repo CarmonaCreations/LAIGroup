@@ -34,7 +34,7 @@ export function ContactFooter() {
           >
             <div className="space-y-8 font-sans text-muted-foreground text-base mt-8">
               <div>
-                <p className="font-display text-foreground text-xl mb-2">LAI Group</p>
+                <p className="font-display text-foreground text-xl mb-2">LAI Design</p>
                 <p>9911 Corkscrew Road #202</p>
                 <p>Estero, Florida 33928</p>
               </div>
@@ -118,9 +118,9 @@ export function ContactFooter() {
                     className="w-full bg-transparent border-b border-border py-4 text-foreground focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer"
                   >
                     <option value="" disabled className="bg-card text-muted-foreground">Select Project Type...</option>
-                    <option value="residential" className="bg-card">Residential</option>
                     <option value="commercial" className="bg-card">Commercial</option>
-                    <option value="mixed-use" className="bg-card">Mixed-Use</option>
+                    <option value="education" className="bg-card">Education</option>
+                    <option value="industrial" className="bg-card">Industrial / Manufacturing</option>
                     <option value="civic" className="bg-card">Civic / Community</option>
                   </select>
                   {errors.projectType && <span className="absolute -bottom-5 left-0 text-xs text-red-500">{errors.projectType.message}</span>}
@@ -155,7 +155,7 @@ export function ContactFooter() {
 
         {/* Footer Bottom */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-sans text-muted-foreground tracking-wider uppercase gap-4">
-          <p>© {new Date().getFullYear()} LAI Group. All Rights Reserved.</p>
+          <p>(c) {new Date().getFullYear()} LAI Design. All Rights Reserved.</p>
           <a
             href="https://www.carmonacreations.com/"
             target="_blank"

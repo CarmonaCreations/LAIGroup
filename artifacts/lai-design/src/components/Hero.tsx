@@ -4,7 +4,7 @@ import { ArrowUpRight, Building2, DraftingCompass, HardHat, Map } from "lucide-r
 
 import innovationPrep from "@assets/Innovation-Preparatory-Academy_1773411287414.jpg";
 import arthrexAMIE from "@assets/Arthrex-AMIE_1773411287409.jpg";
-import miromarLakes from "@assets/Miromar-Lakes_1773411287414.jpg";
+import hollywoodAcademy from "@assets/Hollywood-Academy-Of-Arts-Sciences_1773411287413.jpg";
 
 const companies = [
   {
@@ -105,7 +105,7 @@ export function Hero() {
             <img src={arthrexAMIE} alt="Arthrex AMIE architectural project" className="h-full w-full object-cover" />
           </div>
           <div className="absolute bottom-0 right-20 h-40 w-64 overflow-hidden border border-white/18">
-            <img src={miromarLakes} alt="Miromar Lakes residential design project" className="h-full w-full object-cover" />
+            <img src={hollywoodAcademy} alt="Hollywood Academy of Arts and Sciences design project" className="h-full w-full object-cover" />
           </div>
           <div className="absolute left-10 top-16 flex h-28 w-28 items-center justify-center border border-[#c9a86a]/60 bg-[#11100d]/80 backdrop-blur">
             <Building2 className="h-10 w-10 text-[#c9a86a]" />

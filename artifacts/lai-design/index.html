@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>LAI Group</title>
+    <title>LAI Design</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -27,7 +27,12 @@
     <form name="contact" netlify netlify-honeypot="bot-field" hidden>
       <input type="text" name="name" />
       <input type="email" name="email" />
-      <select name="projectType"></select>
+      <select name="projectType">
+        <option value="commercial">Commercial</option>
+        <option value="education">Education</option>
+        <option value="industrial">Industrial / Manufacturing</option>
+        <option value="civic">Civic / Community</option>
+      </select>
       <textarea name="message"></textarea>
     </form>
 

@@ -35,9 +35,9 @@ export function Nav() {
 
   const navBg = isHome
     ? isScrolled
-      ? "bg-white/90 backdrop-blur-xl shadow-sm shadow-black/5 py-4"
+      ? "bg-background/92 backdrop-blur-xl shadow-sm shadow-black/5 py-4"
       : "bg-transparent py-6"
-    : "bg-white/95 backdrop-blur-xl shadow-sm shadow-black/5 py-4 border-b border-border";
+    : "bg-background/95 backdrop-blur-xl shadow-sm shadow-black/5 py-4 border-b border-border";
 
   const logoColor = isHome && !isScrolled ? "text-white" : "text-foreground";
   const linkColor = isHome && !isScrolled ? "text-white/90 hover:text-white" : "text-foreground/70 hover:text-foreground";
@@ -47,8 +47,8 @@ export function Nav() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${navBg}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <Link href="/">
-            <span className={`font-display text-xl tracking-widest uppercase cursor-pointer transition-colors duration-300 ${logoColor}`}>
-              LAI GROUP
+            <span className={`font-sans text-sm font-semibold tracking-[0.26em] uppercase cursor-pointer transition-colors duration-300 ${logoColor}`}>
+              LAI Design
             </span>
           </Link>
 
@@ -93,7 +93,7 @@ export function Nav() {
               <X className="w-7 h-7" />
             </button>
             <div className="absolute top-7 left-6">
-              <span className="font-display text-xl tracking-widest uppercase text-foreground">LAI GROUP</span>
+              <span className="font-sans text-sm font-semibold tracking-[0.26em] uppercase text-foreground">LAI Design</span>
             </div>
             <div className="flex flex-col items-center space-y-10">
               {navLinks.map((link, i) => (

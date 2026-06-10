@@ -2,11 +2,10 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight, Layers3, PenTool, Ruler, X } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { SiteFooter } from "@/components/SiteFooter";
-import { TimeLapse } from "@/components/TimeLapse";
 
 import innovationPrep from "@assets/Innovation-Preparatory-Academy_1773411287414.jpg";
 import arthrexAMIE from "@assets/Arthrex-AMIE_1773411287409.jpg";
@@ -16,48 +15,61 @@ import arthrexAMISC from "@assets/Arthrex-AMISC_1773411287410.jpg";
 const featured = [
   {
     title: "Innovation Preparatory Academy",
-    type: "Education · Fort Myers, FL",
+    type: "Education / Fort Myers, FL",
     image: innovationPrep,
     cost: "$13M",
     size: "69,850 sq ft",
     completed: "August 2020",
-    description: "LAI partnered with Charter Schools USA and Ryan Companies to provide design engineering services for this two-story school, including a circular stairway and indoor track.",
+    description: "A two-story learning environment with an expressive circular stair, indoor track, and design engineering coordination for Charter Schools USA and Ryan Companies.",
   },
   {
     title: "Arthrex AMIE",
-    type: "Medical Manufacturing · Southwest FL",
+    type: "Medical Manufacturing / Southwest FL",
     image: arthrexAMIE,
     cost: "$36M",
     size: "400,000 gsf",
     completed: "November 2012",
-    description: "Programming and design of a landmark medical manufacturing facility for Arthrex, providing quality products and educational services for orthopaedic surgeons worldwide.",
+    description: "Programming and design for a landmark medical manufacturing campus supporting surgical education, logistics, and high-performance production space.",
   },
   {
     title: "Miromar Lakes",
-    type: "Residential · Miromar Lakes, FL",
+    type: "Residential / Miromar Lakes, FL",
     image: miromarLakes,
     cost: "$1.4M",
     size: "3,600 sq ft",
     completed: "April 2019",
-    description: "LAI performed a design/build remodel of this stunning single-family home.",
+    description: "A design/build residential remodel shaped around refined materials, lakefront views, and a more intentional daily living experience.",
   },
   {
     title: "Arthrex AMISC",
-    type: "Medical Manufacturing · South Carolina",
+    type: "Medical Manufacturing / South Carolina",
     image: arthrexAMISC,
     cost: "$39M",
     size: "253,000 gsf",
     completed: "June 2019",
-    description: "Programming and design of the expansion of Arthrex's medical manufacturing facility to South Carolina.",
+    description: "An expansion of Arthrex's manufacturing presence into South Carolina with architecture planned around technical workflows and future growth.",
   },
 ];
 
-const services = [
-  { title: "Plan", body: "Master planning, feasibility studies and programming tailored to your project's vision." },
-  { title: "Design", body: "Architecture and engineering that balances aesthetics, functionality and code compliance." },
-  { title: "Engineer", body: "Structural, MEP and civil engineering expertise across diverse project types." },
-  { title: "Construct", body: "Design-build delivery that keeps projects on schedule, on budget and built to last." },
+const process = [
+  {
+    title: "Frame",
+    body: "Site, budget, code, schedule, and client goals are translated into a clear architectural problem before design begins.",
+    Icon: Ruler,
+  },
+  {
+    title: "Draw",
+    body: "Concepts move from sketches and massing into coordinated plans, systems, material logic, and permit-ready documentation.",
+    Icon: PenTool,
+  },
+  {
+    title: "Resolve",
+    body: "Design intent is tested against constructability so each project can move confidently toward pricing and delivery.",
+    Icon: Layers3,
+  },
 ];
+
+const typologies = ["Education", "Medical Manufacturing", "Commercial", "Residential", "Civic", "Industrial"];
 
 export default function Home() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
@@ -65,110 +77,130 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>LAI Group – Architecture & Construction | Estero, Florida</title>
-        <meta name="description" content="LAI Group is a full-service architectural design and construction firm based in Estero, FL, serving clients across Florida, South Carolina and nationwide." />
+        <title>LAI Design - Architecture Studio | Estero, Florida</title>
+        <meta
+          name="description"
+          content="LAI Design is the architectural design studio within the LAI family of companies, connecting design, construction, and civil expertise across Florida and beyond."
+        />
         <link rel="canonical" href="https://laigroup.com/" />
       </Helmet>
 
       <Nav />
       <Hero />
 
-      {/* Timelapse */}
-      <TimeLapse />
-
-      {/* Services */}
-      <section className="py-24 md:py-32 px-6 bg-background">
-        <div className="max-w-7xl mx-auto">
+      <section className="bg-background px-6 py-24 md:py-32">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="mb-16 md:mb-20"
           >
-            <p className="font-sans text-[11px] tracking-[0.35em] uppercase text-muted-foreground mb-4">What We Do</p>
-            <h2 className="font-display text-4xl md:text-5xl text-foreground">Full-Service Design & Build</h2>
+            <p className="mb-4 font-sans text-[11px] uppercase tracking-[0.35em] text-primary">Design Practice</p>
+            <h2 className="font-display text-4xl leading-tight text-foreground md:text-6xl">
+              A studio built for the space between idea and construction.
+            </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-border">
-            {services.map((svc, i) => (
+          <div className="grid grid-cols-1 border-y border-border md:grid-cols-3">
+            {process.map(({ title, body, Icon }, i) => (
               <motion.div
-                key={svc.title}
+                key={title}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="bg-background p-10 group"
+                transition={{ duration: 0.65, delay: i * 0.08 }}
+                className="border-b border-border py-8 md:border-b-0 md:border-r md:px-8 md:last:border-r-0"
               >
-                <div className="w-6 h-[1.5px] bg-primary mb-7 group-hover:w-12 transition-all duration-500" />
-                <h3 className="font-display text-xl text-foreground mb-4">{svc.title}</h3>
-                <p className="font-sans text-sm text-muted-foreground leading-relaxed">{svc.body}</p>
+                <Icon className="mb-10 h-7 w-7 text-primary" />
+                <h3 className="mb-4 font-display text-2xl text-foreground">{title}</h3>
+                <p className="font-sans text-sm leading-7 text-muted-foreground">{body}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <section className="py-24 md:py-32 px-6 bg-muted">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-end justify-between mb-14">
+      <section className="relative overflow-hidden bg-[#e9e6dd] px-6 py-24 text-[#171612] md:py-32">
+        <div className="absolute inset-0 blueprint-grid-dark opacity-35" />
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[1fr_0.85fr] lg:items-end">
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.75 }}
+          >
+            <p className="mb-4 font-sans text-[11px] uppercase tracking-[0.35em] text-[#876b32]">Architectural Range</p>
+            <h2 className="max-w-4xl font-display text-4xl leading-tight md:text-6xl">
+              Commercially grounded, spatially refined, technically coordinated.
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.75, delay: 0.1 }}
+            className="grid grid-cols-2 gap-px bg-[#171612]/20 sm:grid-cols-3"
+          >
+            {typologies.map((type) => (
+              <div key={type} className="bg-[#e9e6dd] px-5 py-6">
+                <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em]">{type}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="bg-background px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <p className="font-sans text-[11px] tracking-[0.35em] uppercase text-muted-foreground mb-3">Portfolio</p>
-              <h2 className="font-display text-4xl md:text-5xl text-foreground">Selected Projects</h2>
+              <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.35em] text-muted-foreground">Selected Work</p>
+              <h2 className="font-display text-4xl text-foreground md:text-6xl">Designed to be built.</h2>
             </motion.div>
             <Link href="/work">
-              <span className="hidden md:inline-flex items-center gap-2 font-sans text-xs tracking-[0.18em] uppercase text-foreground hover:text-primary transition-colors cursor-pointer group">
-                View All Projects <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              <span className="inline-flex cursor-pointer items-center gap-2 border-b border-foreground/30 pb-1 font-sans text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:border-primary hover:text-primary">
+                View All Projects <ArrowRight className="h-3.5 w-3.5" />
               </span>
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
             {featured.map((project, i) => (
-              <motion.div
+              <motion.button
                 key={project.title}
                 initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.1 }}
-                className="group relative overflow-hidden aspect-[4/3] bg-muted cursor-pointer"
+                transition={{ duration: 0.7, delay: i * 0.08 }}
+                className={`group relative overflow-hidden bg-muted text-left ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
                 onClick={() => setActiveProject(i)}
               >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading={i < 2 ? "eager" : "lazy"}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/55 transition-colors duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-7 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                  <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-white/70 mb-1">{project.type}</p>
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display text-xl text-white">{project.title}</h3>
-                    <span className="font-sans text-[10px] tracking-[0.15em] uppercase text-white/60 border border-white/30 px-3 py-1 rounded-full">Details</span>
-                  </div>
+                <div className={i === 0 ? "aspect-[4/3] md:h-full" : "aspect-[4/3]"}>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading={i < 2 ? "eager" : "lazy"}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                 </div>
-              </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/12 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <p className="mb-2 font-sans text-[10px] uppercase tracking-[0.2em] text-white/62">{project.type}</p>
+                  <h3 className="font-display text-2xl leading-tight">{project.title}</h3>
+                </div>
+              </motion.button>
             ))}
-          </div>
-
-          <div className="mt-10 text-center md:hidden">
-            <Link href="/work">
-              <span className="inline-flex items-center gap-2 font-sans text-xs tracking-[0.18em] uppercase text-foreground hover:text-primary transition-colors cursor-pointer">
-                View All Projects <ArrowRight className="w-3.5 h-3.5" />
-              </span>
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* Featured Project Lightbox */}
       <AnimatePresence>
         {activeProject !== null && (
           <motion.div
@@ -176,7 +208,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm md:p-10"
             onClick={() => setActiveProject(null)}
           >
             <motion.div
@@ -184,32 +216,27 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 16 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-white rounded-2xl overflow-hidden max-w-4xl w-full shadow-2xl"
+              className="w-full max-w-4xl overflow-hidden bg-white shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Image */}
               <div className="relative aspect-[16/7] overflow-hidden">
-                <img
-                  src={featured[activeProject].image}
-                  alt={featured[activeProject].title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <img src={featured[activeProject].image} alt={featured[activeProject].title} className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
                 <button
                   onClick={() => setActiveProject(null)}
-                  className="absolute top-4 right-4 w-9 h-9 bg-white/15 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/25 transition-colors"
+                  className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center bg-white/15 text-white backdrop-blur-md transition-colors hover:bg-white/25"
+                  aria-label="Close project details"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="h-4 w-4" />
                 </button>
                 <div className="absolute bottom-5 left-7">
-                  <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-white/65 mb-1">{featured[activeProject].type}</p>
-                  <h3 className="font-display text-2xl md:text-3xl text-white">{featured[activeProject].title}</h3>
+                  <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.2em] text-white/65">{featured[activeProject].type}</p>
+                  <h3 className="font-display text-2xl text-white md:text-3xl">{featured[activeProject].title}</h3>
                 </div>
               </div>
 
-              {/* Details */}
               <div className="p-7 md:p-10">
-                <p className="font-sans text-muted-foreground leading-relaxed mb-8 text-sm md:text-base">
+                <p className="mb-8 font-sans text-sm leading-relaxed text-muted-foreground md:text-base">
                   {featured[activeProject].description}
                 </p>
                 <div className="grid grid-cols-3 gap-4 border-t border-border pt-7">
@@ -219,23 +246,10 @@ export default function Home() {
                     { label: "Completed", value: featured[activeProject].completed },
                   ].map((stat) => (
                     <div key={stat.label}>
-                      <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-1">{stat.label}</p>
+                      <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.25em] text-muted-foreground">{stat.label}</p>
                       <p className="font-sans text-sm font-medium text-foreground">{stat.value}</p>
                     </div>
                   ))}
-                </div>
-                <div className="mt-7 pt-6 border-t border-border flex justify-between items-center">
-                  <Link href="/work">
-                    <span className="inline-flex items-center gap-2 font-sans text-xs tracking-[0.18em] uppercase text-primary cursor-pointer hover:gap-3 transition-all">
-                      See All Projects <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                  </Link>
-                  <button
-                    onClick={() => setActiveProject(null)}
-                    className="font-sans text-xs tracking-[0.18em] uppercase text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Close
-                  </button>
                 </div>
               </div>
             </motion.div>
@@ -243,51 +257,15 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* About Teaser */}
-      <section className="py-24 md:py-32 px-6 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <p className="font-sans text-[11px] tracking-[0.35em] uppercase text-muted-foreground mb-4">About LAI Group</p>
-              <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6 leading-tight">
-                25+ Years of<br />Excellence
-              </h2>
-              <div className="w-12 h-[1px] bg-primary mb-8" />
-              <p className="font-sans text-muted-foreground text-base leading-relaxed mb-10">
-                To be the leading provider of superior design and construction services — adding value for clients through innovation, integrity, and aggressive performance that builds enduring relationships.
-              </p>
-              <Link href="/about">
-                <span className="inline-flex items-center gap-2 font-sans text-xs tracking-[0.18em] uppercase text-foreground border-b border-foreground/30 pb-1 hover:border-primary hover:text-primary transition-colors cursor-pointer group">
-                  Our Story <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="grid grid-cols-2 gap-px bg-border"
-            >
-              {[
-                { number: "25+", label: "Years of Experience" },
-                { number: "200+", label: "Projects Delivered" },
-                { number: "3", label: "States & Counting" },
-                { number: "100%", label: "Client Focused" },
-              ].map((stat) => (
-                <div key={stat.label} className="bg-background p-10 text-center">
-                  <p className="font-display text-4xl text-primary mb-2">{stat.number}</p>
-                  <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground">{stat.label}</p>
-                </div>
-              ))}
-            </motion.div>
+      <section className="bg-[#11100d] px-6 py-24 text-white md:py-32">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p className="mb-4 font-sans text-[11px] uppercase tracking-[0.35em] text-[#c9a86a]">LAI Family</p>
+            <h2 className="font-display text-4xl leading-tight md:text-6xl">One client relationship, three specialized companies.</h2>
           </div>
+          <p className="font-sans text-base leading-8 text-white/68 md:text-lg">
+            This Design site can stand as the architectural entry point while clearly routing visitors to LAI Construction and LAI Civil when their project needs move into delivery, site design, permitting, and infrastructure.
+          </p>
         </div>
       </section>
 

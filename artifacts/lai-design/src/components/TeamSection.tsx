@@ -136,7 +136,7 @@ export function TeamSection() {
                     </p>
                   </div>
 
-                  <div className={`relative z-30 grid grid-cols-2 border border-white/18 transition-opacity ${active ? "opacity-0" : "opacity-100"}`}>
+                  <div className={`relative z-30 grid grid-cols-2 border border-white/18 transition-opacity md:hidden ${active ? "opacity-0" : "opacity-100"}`}>
                     <a
                       href={`mailto:${person.email}`}
                       onClick={(e) => e.stopPropagation()}
@@ -153,6 +153,10 @@ export function TeamSection() {
                       <Phone className="h-3.5 w-3.5" />
                       Call
                     </a>
+                  </div>
+
+                  <div className={`hidden border border-white/18 bg-black/18 px-4 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-white/82 backdrop-blur transition-opacity md:block ${active ? "opacity-0" : "opacity-100"}`}>
+                    Hover for direct contact
                   </div>
 
                   <motion.div

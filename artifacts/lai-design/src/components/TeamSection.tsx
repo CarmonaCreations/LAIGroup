@@ -8,6 +8,9 @@ const architects = [
     name: "Marco Alvarez",
     role: "Principal Architect",
     focus: "Client strategy, architectural direction, and complex commercial programs.",
+    lens: "Turns early ambition into clear decisions clients and builders can trust.",
+    inspiredBy: ["Civic courtyards", "Old Florida modernism", "Hand-drawn sections"],
+    outsideStudio: "Weekend sketchbooks, local coffee counters, and studying how cities age.",
     email: "marco@laidesignassoc.com",
     phone: "239-405-6888",
     linkedin: "https://www.linkedin.com/company/lai-design-associates-llc/",
@@ -18,6 +21,9 @@ const architects = [
     name: "Sofia Chen",
     role: "Design Director",
     focus: "Concept development, spatial experience, material systems, and design reviews.",
+    lens: "Looks for warmth, restraint, and the moment a building starts to feel inevitable.",
+    inspiredBy: ["Natural light", "Material samples", "Gallery pacing"],
+    outsideStudio: "Ceramics, garden walks, and collecting texture references while traveling.",
     email: "sofia@laidesignassoc.com",
     phone: "239-405-6888",
     linkedin: "https://www.linkedin.com/company/lai-design-associates-llc/",
@@ -28,6 +34,9 @@ const architects = [
     name: "James Whitfield",
     role: "Project Architect",
     focus: "Documentation, consultant coordination, permitting, and construction-phase support.",
+    lens: "Keeps design intent intact while coordinating the thousand details that make it real.",
+    inspiredBy: ["Detail drawings", "Campus planning", "Clean structural rhythm"],
+    outsideStudio: "Drone photography, woodworking, and quiet hikes before busy project weeks.",
     email: "james@laidesignassoc.com",
     phone: "239-405-6888",
     linkedin: "https://www.linkedin.com/company/lai-design-associates-llc/",
@@ -72,7 +81,7 @@ export function TeamSection() {
           className="mb-12 max-w-3xl md:mb-16"
         >
           <p className="font-sans text-sm leading-relaxed text-muted-foreground">
-            Select a profile to reveal direct contact information and each person's role in the design process.
+            Contact details stay visible for quick access. Hover or tap a profile to reveal the personal notes, interests, and inspirations behind each person's work.
           </p>
         </motion.div>
 
@@ -131,67 +140,69 @@ export function TeamSection() {
 
                   <div>
                     <h3 className="font-display text-4xl leading-none text-white md:text-5xl">{person.name}</h3>
-                    <p className={`mt-4 max-w-sm font-sans text-sm leading-6 transition-opacity ${active ? "text-white/72 opacity-100" : "text-white/60 opacity-0 group-hover:opacity-100"}`}>
-                      {person.focus}
+                    <p className="mt-4 max-w-sm font-sans text-sm leading-6 text-white/68">
+                      {person.lens}
                     </p>
                   </div>
 
-                  <div className={`relative z-30 grid grid-cols-2 border border-white/18 transition-opacity md:hidden ${active ? "opacity-0" : "opacity-100"}`}>
+                  <div className="relative z-30 border border-white/18 bg-black/22 backdrop-blur">
                     <a
                       href={`mailto:${person.email}`}
                       onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center justify-center gap-2 border-r border-white/18 bg-black/18 px-3 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur transition-colors hover:bg-white hover:text-[#11100d]"
+                      className="flex items-center gap-3 border-b border-white/14 px-4 py-3 font-sans text-sm text-white transition-colors hover:bg-white hover:text-[#11100d]"
                     >
-                      <Mail className="h-3.5 w-3.5" />
-                      Email
+                      <Mail className="h-4 w-4 shrink-0" />
+                      <span className="min-w-0 truncate">{person.email}</span>
                     </a>
-                    <a
-                      href={`tel:${person.phone.replace(/[^0-9+]/g, "")}`}
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center justify-center gap-2 bg-black/18 px-3 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur transition-colors hover:bg-white hover:text-[#11100d]"
-                    >
-                      <Phone className="h-3.5 w-3.5" />
-                      Call
-                    </a>
-                  </div>
-
-                  <div className={`hidden border border-white/18 bg-black/18 px-4 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-white/82 backdrop-blur transition-opacity md:block ${active ? "opacity-0" : "opacity-100"}`}>
-                    Hover for direct contact
-                  </div>
-
-                  <motion.div
-                    initial={false}
-                    animate={active ? { y: 0, opacity: 1, height: "auto" } : { y: 26, opacity: 0, height: 0 }}
-                    transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                    className="pointer-events-none overflow-hidden border-t border-white/16"
-                  >
-                    <div className="grid gap-3 pt-5">
-                      <a
-                        href={`mailto:${person.email}`}
-                        onClick={(e) => e.stopPropagation()}
-                        className="pointer-events-auto inline-flex items-center gap-3 font-sans text-sm text-white transition-colors hover:text-[#c9a86a]"
-                      >
-                        <Mail className="h-4 w-4" />
-                        {person.email}
-                      </a>
+                    <div className="grid grid-cols-2">
                       <a
                         href={`tel:${person.phone.replace(/[^0-9+]/g, "")}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="pointer-events-auto inline-flex items-center gap-3 font-sans text-sm text-white transition-colors hover:text-[#c9a86a]"
+                        className="inline-flex items-center justify-center gap-2 border-r border-white/14 px-3 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-white hover:text-[#11100d]"
                       >
-                        <Phone className="h-4 w-4" />
-                        {person.phone}
+                        <Phone className="h-3.5 w-3.5" />
+                        Call
                       </a>
                       <a
                         href={person.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="pointer-events-auto inline-flex items-center gap-3 font-sans text-sm text-white transition-colors hover:text-[#c9a86a]"
+                        className="inline-flex items-center justify-center gap-2 px-3 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-white hover:text-[#11100d]"
                       >
-                        <Linkedin className="h-4 w-4" />
-                        LinkedIn profile
+                        <Linkedin className="h-3.5 w-3.5" />
+                        LinkedIn
                       </a>
+                    </div>
+                  </div>
+
+                  <motion.div
+                    initial={false}
+                    animate={active ? { y: 0, opacity: 1, height: "auto" } : { y: 26, opacity: 0, height: 0 }}
+                    transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden border-t border-white/16"
+                  >
+                    <div className="space-y-5 pt-5">
+                      <div>
+                        <p className="mb-2 font-sans text-[10px] uppercase tracking-[0.24em] text-[#c9a86a]">Project Role</p>
+                        <p className="font-sans text-sm leading-6 text-white/74">{person.focus}</p>
+                      </div>
+
+                      <div>
+                        <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.24em] text-[#c9a86a]">Inspired By</p>
+                        <div className="flex flex-wrap gap-2">
+                          {person.inspiredBy.map((tag) => (
+                            <span key={tag} className="border border-white/16 px-3 py-1.5 font-sans text-[11px] text-white/76">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="mb-2 font-sans text-[10px] uppercase tracking-[0.24em] text-[#c9a86a]">Outside the Studio</p>
+                        <p className="font-sans text-sm leading-6 text-white/68">{person.outsideStudio}</p>
+                      </div>
                     </div>
                   </motion.div>
                 </div>

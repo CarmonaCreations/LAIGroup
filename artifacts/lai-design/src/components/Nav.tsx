@@ -48,7 +48,7 @@ export function Nav() {
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <Link href="/">
             <span className={`font-sans text-sm font-semibold tracking-[0.26em] uppercase cursor-pointer transition-colors duration-300 ${logoColor}`}>
-              LAI Design
+              LAI Design Associates
             </span>
           </Link>
 
@@ -93,7 +93,7 @@ export function Nav() {
               <X className="w-7 h-7" />
             </button>
             <div className="absolute top-7 left-6">
-              <span className="font-sans text-sm font-semibold tracking-[0.26em] uppercase text-foreground">LAI Design</span>
+              <span className="font-sans text-sm font-semibold tracking-[0.26em] uppercase text-foreground">LAI Design Associates</span>
             </div>
             <div className="flex flex-col items-center space-y-10">
               {navLinks.map((link, i) => (

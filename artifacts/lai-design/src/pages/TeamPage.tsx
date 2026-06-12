@@ -7,10 +7,10 @@ export default function TeamPage() {
   return (
     <>
       <Helmet>
-        <title>Team - LAI Design</title>
+        <title>Team - LAI Design Associates</title>
         <meta
           name="description"
-          content="Meet the architects and design professionals behind LAI Design's commercial, civic, education, and industrial projects."
+          content="Meet the architects and design professionals behind LAI Design Associates' commercial, civic, education, and industrial projects."
         />
       </Helmet>
 

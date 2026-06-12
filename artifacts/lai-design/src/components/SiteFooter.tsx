@@ -14,7 +14,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="mb-14 grid grid-cols-1 gap-12 md:grid-cols-3">
           <div>
-            <span className="font-sans text-sm font-semibold uppercase tracking-[0.26em] text-foreground">LAI Design</span>
+            <span className="font-sans text-sm font-semibold uppercase tracking-[0.26em] text-foreground">LAI Design Associates</span>
             <p className="mt-4 font-sans text-sm leading-relaxed text-muted-foreground">
               Architecture / Planning / Technical Coordination
             </p>
@@ -63,7 +63,7 @@ export function SiteFooter() {
               <Linkedin className="h-4 w-4" />
             </a>
             <p className="font-sans text-xs tracking-wide text-muted-foreground">
-              (c) {new Date().getFullYear()} LAI Design
+              (c) {new Date().getFullYear()} LAI Design Associates
             </p>
           </div>
           <a

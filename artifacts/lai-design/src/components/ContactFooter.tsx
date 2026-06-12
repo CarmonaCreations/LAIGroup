@@ -34,7 +34,7 @@ export function ContactFooter() {
           >
             <div className="space-y-8 font-sans text-muted-foreground text-base mt-8">
               <div>
-                <p className="font-display text-foreground text-xl mb-2">LAI Design</p>
+                <p className="font-display text-foreground text-xl mb-2">LAI Design Associates</p>
                 <p>9911 Corkscrew Road #202</p>
                 <p>Estero, Florida 33928</p>
               </div>
@@ -155,7 +155,7 @@ export function ContactFooter() {
 
         {/* Footer Bottom */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-sans text-muted-foreground tracking-wider uppercase gap-4">
-          <p>(c) {new Date().getFullYear()} LAI Design. All Rights Reserved.</p>
+          <p>(c) {new Date().getFullYear()} LAI Design Associates. All Rights Reserved.</p>
           <a
             href="https://www.carmonacreations.com/"
             target="_blank"

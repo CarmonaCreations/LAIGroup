@@ -77,10 +77,10 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>LAI Design - Architecture Studio | Estero, Florida</title>
+        <title>LAI Design Associates - Architecture Studio | Estero, Florida</title>
         <meta
           name="description"
-          content="LAI Design is the architectural design studio within the LAI family of companies, connecting design, construction, and civil expertise across Florida and beyond."
+          content="LAI Design Associates is the architectural design studio within the LAI family of companies, connecting design, construction, and civil expertise across Florida and beyond."
         />
         <link rel="canonical" href="https://laidesignassoc.com/" />
       </Helmet>
@@ -264,7 +264,7 @@ export default function Home() {
             <h2 className="font-display text-4xl leading-tight md:text-6xl">One client relationship, three specialized companies.</h2>
           </div>
           <p className="font-sans text-base leading-8 text-white/68 md:text-lg">
-            This Design site can stand as the architectural entry point while clearly routing visitors to LAI Construction and LAI Civil when their project needs move into delivery, site design, permitting, and infrastructure.
+            LAI Design Associates can stand as the architectural entry point while clearly routing visitors to LAI Construction and LAI Civil when their project needs move into delivery, site design, permitting, and infrastructure.
           </p>
         </div>
       </section>

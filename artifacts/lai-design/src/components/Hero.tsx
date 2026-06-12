@@ -8,7 +8,7 @@ import hollywoodAcademy from "@assets/Hollywood-Academy-Of-Arts-Sciences_1773411
 
 const companies = [
   {
-    name: "LAI Design",
+    name: "LAI Design Associates",
     href: "/",
     label: "You are here",
     body: "Architecture, planning, and technical coordination.",
@@ -52,10 +52,10 @@ export function Hero() {
             className="max-w-4xl"
           >
             <p className="mb-6 font-sans text-[11px] uppercase tracking-[0.38em] text-[#c9a86a]">
-              LAI Group / Design Division
+              LAI Design Associates
             </p>
             <h1 className="font-display text-[clamp(4rem,9.5vw,8.6rem)] leading-[0.84] text-white">
-              LAI<br />Design
+              LAI Design<br />Associates
             </h1>
             <p className="mt-6 max-w-xl font-sans text-base leading-7 text-white/72 md:text-lg md:leading-8">
               Architectural design for commercial, education, civic, industrial, and medical manufacturing projects.
@@ -80,7 +80,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
             className="grid grid-cols-12 gap-3 lg:ml-auto lg:w-full lg:max-w-2xl"
-            aria-label="Selected LAI Design work"
+            aria-label="Selected LAI Design Associates work"
           >
             <div className="col-span-12 overflow-hidden border border-white/14 bg-white/5 md:col-span-8">
               <img
@@ -120,7 +120,7 @@ export function Hero() {
         >
           <div className="border-b border-white/12 px-5 py-4 md:px-6">
             <p className="font-sans text-[10px] uppercase tracking-[0.32em] text-white/46">
-              Three connected LAI companies
+              One vision across design, construction, and civil
             </p>
           </div>
 

@@ -1,13 +1,11 @@
 modules = ["nodejs-24"]
+run = "pnpm --filter @workspace/lai-design run dev"
 
 [[artifacts]]
 id = "artifacts/api-server"
 
 [[artifacts]]
 id = "artifacts/mockup-sandbox"
-
-[[artifacts]]
-id = "artifacts/lai-design"
 
 [deployment]
 router = "application"
@@ -17,8 +15,9 @@ deploymentTarget = "autoscale"
 args = ["pnpm", "store", "prune"]
 env = { "CI" = "true" }
 
-[workflows]
-runButton = "Project"
+[env]
+PORT = "5173"
+BASE_PATH = "/"
 
 [agent]
 stack = "PNPM_WORKSPACE"

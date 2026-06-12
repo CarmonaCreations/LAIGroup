@@ -2,9 +2,10 @@ import { Instagram, Linkedin } from "lucide-react";
 import { Link } from "wouter";
 
 const companyLinks = [
+  { name: "LAI Companies", href: "/companies" },
   { name: "Design", href: "/" },
-  { name: "Construction", href: "https://lai-construction.com" },
-  { name: "Civil", href: "https://lai-civil.com" },
+  { name: "Construction", href: "/companies#lai-construction" },
+  { name: "Civil", href: "/companies#lai-civil" },
   { name: "Contact", href: "/contact" },
 ];
 

@@ -8,6 +8,7 @@ import WorkPage from "./pages/WorkPage";
 import AboutPage from "./pages/AboutPage";
 import TeamPage from "./pages/TeamPage";
 import ContactPage from "./pages/ContactPage";
+import CompaniesPage from "./pages/CompaniesPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +43,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/work" component={WorkPage} />
       <Route path="/about" component={AboutPage} />
+      <Route path="/companies" component={CompaniesPage} />
       <Route path="/team" component={TeamPage} />
       <Route path="/contact" component={ContactPage} />
       <Route>

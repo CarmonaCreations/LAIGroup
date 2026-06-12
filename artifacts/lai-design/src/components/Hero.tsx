@@ -18,7 +18,7 @@ const companies = [
   },
   {
     name: "LAI Construction",
-    href: "#lai-construction",
+    href: "/companies#lai-construction",
     label: "Same company family",
     body: "Preconstruction, project delivery, and field execution.",
     action: "View construction",
@@ -27,7 +27,7 @@ const companies = [
   },
   {
     name: "LAI Civil",
-    href: "#lai-civil",
+    href: "/companies#lai-civil",
     label: "Same company family",
     body: "Civil engineering, site design, permitting, and infrastructure.",
     action: "View civil",
@@ -51,12 +51,12 @@ export function Hero() {
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-4xl"
           >
-            <p className="mb-6 font-sans text-[11px] uppercase tracking-[0.38em] text-[#c9a86a]">
-              LAI Design Associates
-            </p>
-            <h1 className="font-display text-[clamp(4rem,9.5vw,8.6rem)] leading-[0.84] text-white">
-              LAI Design<br />Associates
+            <h1 className="font-display text-[clamp(5rem,12vw,10rem)] leading-[0.78] text-white">
+              LAI
             </h1>
+            <p className="mt-4 font-sans text-[clamp(1.4rem,3vw,2.4rem)] font-semibold uppercase tracking-[0.2em] text-white">
+              Design Associates
+            </p>
             <p className="mt-6 max-w-xl font-sans text-base leading-7 text-white/72 md:text-lg md:leading-8">
               Architectural design for commercial, education, civic, industrial, and medical manufacturing projects.
             </p>
@@ -150,12 +150,12 @@ export function Hero() {
                 </span>
               );
 
-            return active ? (
+            return href.startsWith("/") ? (
               <Link href={href} key={name}>
                 {content}
               </Link>
             ) : (
-              <a href={href} key={name} onClick={(event) => event.preventDefault()} aria-disabled="true">
+              <a href={href} key={name}>
                 {content}
               </a>
             );

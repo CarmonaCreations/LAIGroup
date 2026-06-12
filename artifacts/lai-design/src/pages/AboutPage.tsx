@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Nav } from "@/components/Nav";
 import { AboutUs } from "@/components/AboutUs";
+import { LicensureSection } from "@/components/LicensureSection";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export default function AboutPage() {
@@ -23,6 +24,8 @@ export default function AboutPage() {
       </div>
 
       <AboutUs />
+
+      <LicensureSection />
 
       <SiteFooter />
     </>

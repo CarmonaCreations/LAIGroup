@@ -1,17 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { KeyboardEvent, MouseEvent } from "react";
 import { motion } from "framer-motion";
 import { BadgeCheck, FileText, MapPinned } from "lucide-react";
-import { geoPath } from "d3-geo";
-import { feature } from "topojson-client";
-import statesTopology from "us-atlas/states-10m.json";
 
 type LicensedStateKey = "FL" | "SC";
-type StateFeature = {
-  id?: string | number;
-  properties?: { name?: string };
-};
 
-const licensedStates = {
+const licensedStates: Record<LicensedStateKey, { name: string; note: string }> = {
   FL: {
     name: "Florida",
     note: "Architectural services represented for Florida projects. Add verified license numbers before publishing.",
@@ -20,11 +14,6 @@ const licensedStates = {
     name: "South Carolina",
     note: "Architectural services represented for South Carolina projects. Add verified license numbers before publishing.",
   },
-};
-
-const stateIdToLicenseKey: Record<string, LicensedStateKey> = {
-  "12": "FL",
-  "45": "SC",
 };
 
 const licenseRecords = [
@@ -42,19 +31,113 @@ const licenseRecords = [
   },
 ];
 
+function prepareMapSvg(svg: string) {
+  return svg
+    .replace("<svg ", '<svg viewBox="0 0 959 593" preserveAspectRatio="xMidYMid meet" ')
+    .replace('<path class="fl"', '<path class="fl licensed-state" tabindex="0" role="button" aria-label="Florida licensed state"')
+    .replace(
+      '<path class="sc"',
+      '<path class="sc licensed-state" tabindex="0" role="button" aria-label="South Carolina licensed state"',
+    );
+}
+
+function getStateKeyFromTarget(target: EventTarget | null): LicensedStateKey | null {
+  const path = target instanceof Element ? target.closest(".licensed-state") : null;
+
+  if (!path) {
+    return null;
+  }
+
+  if (path.classList.contains("fl")) {
+    return "FL";
+  }
+
+  if (path.classList.contains("sc")) {
+    return "SC";
+  }
+
+  return null;
+}
+
 export function LicensureSection() {
   const [selectedState, setSelectedState] = useState<LicensedStateKey>("FL");
+  const [mapSvg, setMapSvg] = useState("");
   const selected = licensedStates[selectedState];
-  const path = geoPath();
-  const states = (
-    (feature as (topology: unknown, object: unknown) => { features: StateFeature[] })(
-      statesTopology,
-      (statesTopology as { objects: { states: unknown } }).objects.states,
-    )
-  ).features;
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetch(`${import.meta.env.BASE_URL}images/us-states-map.svg`)
+      .then((response) => response.text())
+      .then((svg) => {
+        if (isMounted) {
+          setMapSvg(prepareMapSvg(svg));
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setMapSvg("");
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleMapClick = (event: MouseEvent<HTMLDivElement>) => {
+    const stateKey = getStateKeyFromTarget(event.target);
+
+    if (stateKey) {
+      setSelectedState(stateKey);
+    }
+  };
+
+  const handleMapKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== "Enter" && event.key !== " ") {
+      return;
+    }
+
+    const stateKey = getStateKeyFromTarget(event.target);
+
+    if (stateKey) {
+      event.preventDefault();
+      setSelectedState(stateKey);
+    }
+  };
 
   return (
     <section className="border-t border-border bg-[#11100d] px-6 py-24 text-white md:py-32">
+      <style>{`
+        .license-map-shell svg {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        .license-map-shell svg path {
+          transition: fill 180ms ease, filter 180ms ease, opacity 180ms ease;
+        }
+
+        .license-map-shell svg .licensed-state {
+          cursor: pointer;
+          fill: #76aefc !important;
+          outline: none;
+        }
+
+        .license-map-shell svg .licensed-state:hover,
+        .license-map-shell svg .licensed-state:focus-visible {
+          fill: #3b82f6 !important;
+          filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.72));
+        }
+
+        .license-map-shell[data-selected="FL"] svg .fl,
+        .license-map-shell[data-selected="SC"] svg .sc {
+          fill: #2563eb !important;
+          filter: drop-shadow(0 0 7px rgba(37, 99, 235, 0.78));
+        }
+      `}</style>
+
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -96,40 +179,29 @@ export function LicensureSection() {
             <MapPinned className="h-8 w-8 text-[#c9a86a]" />
           </div>
 
-          <div className="relative overflow-hidden border border-white/12 bg-[#f5f4f1] p-4 md:p-6">
-            <svg viewBox="0 0 975 610" role="img" aria-label="United States map highlighting Florida and South Carolina" className="h-auto w-full drop-shadow-sm">
-              {states.map((state) => {
-                const id = String(state.id).padStart(2, "0");
-                const stateKey = stateIdToLicenseKey[id];
-                const licensed = Boolean(stateKey);
-                const selectedLocation = stateKey === selectedState;
-                const stateName = stateKey ? licensedStates[stateKey].name : state.properties?.name;
-
-                return (
-                  <path
-                    key={id}
-                    d={path(state as never) ?? ""}
-                    role={licensed ? "button" : "presentation"}
-                    tabIndex={licensed ? 0 : -1}
-                    onClick={() => stateKey && setSelectedState(stateKey)}
-                    onKeyDown={(event) => {
-                      if (stateKey && (event.key === "Enter" || event.key === " ")) {
-                        setSelectedState(stateKey);
-                      }
-                    }}
-                    className={`transition-colors duration-200 ${licensed ? "cursor-pointer hover:brightness-105" : "cursor-default"}`}
-                    fill={licensed ? (selectedLocation ? "#3b82f6" : "#76aefc") : "#d9d9d6"}
-                    stroke="#ffffff"
-                    strokeWidth={selectedLocation ? 1.4 : 0.85}
-                    aria-label={licensed ? `${stateName} licensed state` : undefined}
-                  />
-                );
-              })}
-            </svg>
+          <div className="overflow-hidden border border-white/12 bg-[#f7f6f2] p-4 md:p-6">
+            <div
+              className="license-map-shell"
+              data-selected={selectedState}
+              onClick={handleMapClick}
+              onKeyDown={handleMapKeyDown}
+              role="img"
+              aria-label="United States map with Florida and South Carolina highlighted as licensed states"
+            >
+              {mapSvg ? (
+                <div dangerouslySetInnerHTML={{ __html: mapSvg }} />
+              ) : (
+                <img
+                  src={`${import.meta.env.BASE_URL}images/us-states-map.svg`}
+                  alt="Blank United States states map"
+                  className="h-auto w-full"
+                />
+              )}
+            </div>
 
             <div className="mt-5 flex flex-wrap items-center justify-center gap-6 border-t border-black/10 pt-4">
               <span className="inline-flex items-center gap-2 font-sans text-xs font-semibold text-[#1f2937]">
-                <span className="h-4 w-4 rounded-sm bg-[#3b82f6]" />
+                <span className="h-4 w-4 rounded-sm bg-[#2563eb]" />
                 Licensed
               </span>
               <span className="inline-flex items-center gap-2 font-sans text-xs font-semibold text-[#1f2937]">
@@ -150,7 +222,7 @@ export function LicensureSection() {
               <button
                 key={abbr}
                 type="button"
-                onClick={() => setSelectedState(abbr as keyof typeof licensedStates)}
+                onClick={() => setSelectedState(abbr as LicensedStateKey)}
                 className={`border p-4 text-left transition-colors ${
                   selectedState === abbr ? "border-[#c9a86a] bg-[#c9a86a]/12" : "border-white/12 hover:border-white/30"
                 }`}

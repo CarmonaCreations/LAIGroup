@@ -9,6 +9,11 @@ const companyLinks = [
   { name: "Contact", href: "/contact" },
 ];
 
+const licenseDetails = [
+  { state: "Florida", detail: "License number pending client confirmation" },
+  { state: "South Carolina", detail: "License number pending client confirmation" },
+];
+
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-background">
@@ -51,6 +56,25 @@ export function SiteFooter() {
                   </Link>
                 ),
               )}
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-8 border-y border-border py-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div>
+              <p className="font-sans text-xs uppercase tracking-[0.25em] text-muted-foreground">Licensing</p>
+              <p className="mt-2 max-w-2xl font-sans text-xs leading-6 text-muted-foreground">
+                Professional license and certificate information can be listed here for states that require public website disclosure.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 md:min-w-[420px]">
+              {licenseDetails.map((license) => (
+                <div key={license.state}>
+                  <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-foreground">{license.state}</p>
+                  <p className="mt-1 font-sans text-xs leading-5 text-muted-foreground">{license.detail}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

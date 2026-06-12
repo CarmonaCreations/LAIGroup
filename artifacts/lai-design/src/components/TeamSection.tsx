@@ -9,7 +9,6 @@ const architects = [
     role: "Principal Architect",
     focus: "Client strategy, architectural direction, and complex commercial programs.",
     lens: "Turns early ambition into clear decisions clients and builders can trust.",
-    inspiredBy: ["Civic courtyards", "Old Florida modernism", "Hand-drawn sections"],
     outsideStudio: "Weekend sketchbooks, local coffee counters, and studying how cities age.",
     email: "marco@laidesignassoc.com",
     phone: "239-405-6888",
@@ -22,7 +21,6 @@ const architects = [
     role: "Design Director",
     focus: "Concept development, spatial experience, material systems, and design reviews.",
     lens: "Looks for warmth, restraint, and the moment a building starts to feel inevitable.",
-    inspiredBy: ["Natural light", "Material samples", "Gallery pacing"],
     outsideStudio: "Ceramics, garden walks, and collecting texture references while traveling.",
     email: "sofia@laidesignassoc.com",
     phone: "239-405-6888",
@@ -35,7 +33,6 @@ const architects = [
     role: "Project Architect",
     focus: "Documentation, consultant coordination, permitting, and construction-phase support.",
     lens: "Keeps design intent intact while coordinating the thousand details that make it real.",
-    inspiredBy: ["Detail drawings", "Campus planning", "Clean structural rhythm"],
     outsideStudio: "Drone photography, woodworking, and quiet hikes before busy project weeks.",
     email: "james@laidesignassoc.com",
     phone: "239-405-6888",
@@ -81,7 +78,7 @@ export function TeamSection() {
           className="mb-12 max-w-3xl md:mb-16"
         >
           <p className="font-sans text-sm leading-relaxed text-muted-foreground">
-            Contact details stay visible for quick access. Hover or tap a profile to reveal the personal notes, interests, and inspirations behind each person's work.
+            Reach the right team member directly, then hover or tap a profile for a little more context.
           </p>
         </motion.div>
 
@@ -186,17 +183,6 @@ export function TeamSection() {
                       <div>
                         <p className="mb-2 font-sans text-[10px] uppercase tracking-[0.24em] text-[#c9a86a]">Project Role</p>
                         <p className="font-sans text-sm leading-6 text-white/74">{person.focus}</p>
-                      </div>
-
-                      <div>
-                        <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.24em] text-[#c9a86a]">Inspired By</p>
-                        <div className="flex flex-wrap gap-2">
-                          {person.inspiredBy.map((tag) => (
-                            <span key={tag} className="border border-white/16 px-3 py-1.5 font-sans text-[11px] text-white/76">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
                       </div>
 
                       <div>

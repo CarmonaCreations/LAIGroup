@@ -28,20 +28,11 @@ const licenseRecords = [
   },
 ];
 
-const stateTiles = [
-  ["", "", "", "", "", "", "", "", "", "", "ME", ""],
-  ["", "", "", "", "", "", "", "", "VT", "NH", "MA", ""],
-  ["WA", "ID", "MT", "ND", "MN", "WI", "MI", "NY", "RI", "CT", "NJ", ""],
-  ["OR", "NV", "WY", "SD", "IA", "IL", "IN", "OH", "PA", "MD", "DE", ""],
-  ["CA", "UT", "CO", "NE", "MO", "KY", "WV", "VA", "NC", "SC", "", ""],
-  ["", "AZ", "NM", "KS", "AR", "TN", "", "", "", "GA", "", ""],
-  ["AK", "", "OK", "LA", "MS", "AL", "", "", "", "FL", "", "HI"],
-  ["", "", "TX", "", "", "", "", "", "", "", "", ""],
-];
-
 export function LicensureSection() {
   const [selectedState, setSelectedState] = useState<keyof typeof licensedStates>("FL");
   const selected = licensedStates[selectedState];
+  const isFlorida = selectedState === "FL";
+  const isSouthCarolina = selectedState === "SC";
 
   return (
     <section className="border-t border-border bg-[#11100d] px-6 py-24 text-white md:py-32">
@@ -80,43 +71,80 @@ export function LicensureSection() {
         >
           <div className="mb-6 flex items-center justify-between gap-4">
             <div>
-              <p className="font-sans text-[10px] uppercase tracking-[0.28em] text-white/46">Interactive State Map</p>
+              <p className="font-sans text-[10px] uppercase tracking-[0.28em] text-white/46">Licensed State Map</p>
               <h3 className="mt-2 font-display text-3xl">Florida & South Carolina</h3>
             </div>
             <MapPinned className="h-8 w-8 text-[#c9a86a]" />
           </div>
 
-          <div className="overflow-x-auto border border-white/12 bg-[#171612] p-4 md:p-6">
-            <div className="grid min-w-[620px] grid-cols-12 gap-1.5" role="img" aria-label="United States state map highlighting Florida and South Carolina">
-              {stateTiles.flatMap((row, rowIndex) =>
-                row.map((abbr, colIndex) => {
-                  const licensed = abbr === "FL" || abbr === "SC";
-                  const selectedTile = abbr === selectedState;
+          <div className="relative overflow-hidden border border-white/12 bg-[#171612] p-3 md:p-5">
+            <svg viewBox="0 0 980 620" role="img" aria-label="United States map highlighting Florida and South Carolina" className="h-auto w-full">
+              <rect width="980" height="620" fill="#171612" />
+              <path
+                d="M96 205 L132 145 L208 119 L288 132 L365 118 L458 136 L548 122 L632 148 L716 145 L822 181 L893 235 L850 281 L790 288 L745 330 L672 341 L637 384 L548 392 L488 424 L388 418 L310 397 L245 415 L178 379 L147 310 L101 280 Z"
+                fill="#25231d"
+                stroke="#4d493e"
+                strokeWidth="3"
+              />
+              <path d="M118 444 L178 416 L250 435 L282 491 L198 523 L120 500 Z" fill="#211f1a" stroke="#4d493e" strokeWidth="3" />
+              <path d="M307 506 L338 493 L375 507 L358 531 L321 530 Z" fill="#211f1a" stroke="#4d493e" strokeWidth="3" />
 
-                  return (
-                    <div key={`${rowIndex}-${colIndex}`} className="aspect-square">
-                      {abbr ? (
-                        <button
-                          type="button"
-                          disabled={!licensed}
-                          onClick={() => licensed && setSelectedState(abbr as keyof typeof licensedStates)}
-                          className={`flex h-full w-full items-center justify-center border font-sans text-[11px] font-semibold transition-colors ${
-                            licensed
-                              ? selectedTile
-                                ? "border-white bg-[#c9a86a] text-[#11100d]"
-                                : "border-[#c9a86a]/70 bg-[#c9a86a]/20 text-white hover:bg-[#c9a86a]/35"
-                              : "border-white/8 bg-white/[0.035] text-white/28"
-                          }`}
-                          aria-label={licensed ? `${licensedStates[abbr as keyof typeof licensedStates].name} licensed state` : `${abbr} not currently highlighted`}
-                        >
-                          {abbr}
-                        </button>
-                      ) : null}
-                    </div>
-                  );
-                }),
-              )}
-            </div>
+              <path d="M205 126 L195 386" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
+              <path d="M305 130 L292 397" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
+              <path d="M410 128 L402 418" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
+              <path d="M520 130 L516 395" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
+              <path d="M632 150 L624 355" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
+              <path d="M735 160 L708 330" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
+              <path d="M120 235 L855 245" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
+              <path d="M142 316 L752 322" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
+              <path d="M197 385 L590 386" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
+
+              <g
+                role="button"
+                tabIndex={0}
+                onClick={() => setSelectedState("SC")}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") setSelectedState("SC");
+                }}
+                className="cursor-pointer outline-none"
+                aria-label="Select South Carolina"
+              >
+                <path
+                  d="M734 294 L783 285 L822 313 L790 350 L737 338 L712 316 Z"
+                  fill={isSouthCarolina ? "#c9a86a" : "#8b7345"}
+                  stroke={isSouthCarolina ? "#fff4d8" : "#c9a86a"}
+                  strokeWidth="4"
+                />
+                <circle cx="766" cy="316" r={isSouthCarolina ? "10" : "7"} fill="#ffffff" />
+                <text x="739" y="275" fill="#ffffff" fontSize="24" fontFamily="Inter, sans-serif" fontWeight="700">SC</text>
+              </g>
+
+              <g
+                role="button"
+                tabIndex={0}
+                onClick={() => setSelectedState("FL")}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") setSelectedState("FL");
+                }}
+                className="cursor-pointer outline-none"
+                aria-label="Select Florida"
+              >
+                <path
+                  d="M691 386 L792 398 L830 445 L842 536 L811 557 L775 482 L717 450 Z"
+                  fill={isFlorida ? "#c9a86a" : "#8b7345"}
+                  stroke={isFlorida ? "#fff4d8" : "#c9a86a"}
+                  strokeWidth="4"
+                />
+                <path d="M820 516 C861 528 889 552 907 585" fill="none" stroke={isFlorida ? "#fff4d8" : "#c9a86a"} strokeWidth="5" strokeLinecap="round" />
+                <circle cx="765" cy="432" r={isFlorida ? "10" : "7"} fill="#ffffff" />
+                <text x="728" y="477" fill="#ffffff" fontSize="24" fontFamily="Inter, sans-serif" fontWeight="700">FL</text>
+              </g>
+
+              <text x="146" y="474" fill="#716d61" fontSize="20" fontFamily="Inter, sans-serif" fontWeight="700">AK</text>
+              <text x="325" y="526" fill="#716d61" fontSize="20" fontFamily="Inter, sans-serif" fontWeight="700">HI</text>
+              <text x="646" y="368" fill="#716d61" fontSize="17" fontFamily="Inter, sans-serif">GA</text>
+              <text x="805" y="284" fill="#716d61" fontSize="17" fontFamily="Inter, sans-serif">NC</text>
+            </svg>
           </div>
 
           <div className="mt-6 border border-white/12 p-5">
@@ -144,7 +172,7 @@ export function LicensureSection() {
           <div className="mt-6 flex items-start gap-3 border-t border-white/12 pt-5">
             <FileText className="mt-1 h-4 w-4 shrink-0 text-[#c9a86a]" />
             <p className="font-sans text-xs leading-6 text-white/52">
-              This tile map is intentionally simplified for readability. Add verified license numbers and certificate details before publishing if required by each state board.
+              This map uses a simplified geographic silhouette for readability while preserving the recognizable United States shape. Add verified license numbers and certificate details before publishing if required by each state board.
             </p>
           </div>
         </motion.div>

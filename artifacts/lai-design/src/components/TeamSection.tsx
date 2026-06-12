@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mail, Phone, Linkedin, X } from "lucide-react";
+import { ArrowUpRight, Mail, Phone, Linkedin } from "lucide-react";
 
 const architects = [
   {
@@ -36,10 +36,33 @@ const architects = [
 ];
 
 export function TeamSection() {
-  const [activeId, setActiveId] = useState<string | null>(architects[0].id);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (sectionRef.current && !sectionRef.current.contains(target)) {
+        setActiveId(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, []);
 
   return (
-    <section id="team" className="bg-background px-4 py-16 md:px-6 md:py-24">
+    <section
+      ref={sectionRef}
+      id="team"
+      className="bg-background px-4 py-16 md:px-6 md:py-24"
+      onPointerDownCapture={(event) => {
+        const target = event.target as HTMLElement;
+        if (!target.closest("[data-team-card]")) {
+          setActiveId(null);
+        }
+      }}
+    >
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -64,7 +87,17 @@ export function TeamSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.7, delay: i * 0.12 }}
-                onMouseEnter={() => setActiveId(person.id)}
+                data-team-card
+                onPointerEnter={(event) => {
+                  if (event.pointerType !== "touch") {
+                    setActiveId(person.id);
+                  }
+                }}
+                onPointerLeave={(event) => {
+                  if (event.pointerType !== "touch") {
+                    setActiveId(null);
+                  }
+                }}
                 onClick={() => setActiveId(active ? null : person.id)}
                 className={`group relative min-h-[560px] overflow-hidden border transition-colors duration-300 ${
                   active ? "border-primary/50 bg-[#11100d] text-white" : "border-border bg-card text-foreground"
@@ -91,8 +124,8 @@ export function TeamSection() {
                         {person.role}
                       </p>
                     </div>
-                    <span className={`flex h-10 w-10 items-center justify-center border transition-colors ${active ? "border-white/24 bg-white text-[#11100d]" : "border-white/24 text-white"}`}>
-                      {active ? <X className="h-4 w-4" /> : <ArrowUpRight className="h-4 w-4" />}
+                    <span className={`flex h-10 w-10 items-center justify-center border transition-colors ${active ? "border-[#c9a86a] bg-[#c9a86a] text-[#11100d]" : "border-white/24 text-white"}`}>
+                      <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </div>
 
@@ -103,13 +136,32 @@ export function TeamSection() {
                     </p>
                   </div>
 
+                  <div className={`relative z-30 grid grid-cols-2 border border-white/18 transition-opacity ${active ? "opacity-0" : "opacity-100"}`}>
+                    <a
+                      href={`mailto:${person.email}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center justify-center gap-2 border-r border-white/18 bg-black/18 px-3 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur transition-colors hover:bg-white hover:text-[#11100d]"
+                    >
+                      <Mail className="h-3.5 w-3.5" />
+                      Email
+                    </a>
+                    <a
+                      href={`tel:${person.phone.replace(/[^0-9+]/g, "")}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center justify-center gap-2 bg-black/18 px-3 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur transition-colors hover:bg-white hover:text-[#11100d]"
+                    >
+                      <Phone className="h-3.5 w-3.5" />
+                      Call
+                    </a>
+                  </div>
+
                   <motion.div
                     initial={false}
-                    animate={active ? { y: 0, opacity: 1 } : { y: 26, opacity: 0 }}
+                    animate={active ? { y: 0, opacity: 1, height: "auto" } : { y: 26, opacity: 0, height: 0 }}
                     transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                    className="pointer-events-none border-t border-white/16 pt-5"
+                    className="pointer-events-none overflow-hidden border-t border-white/16"
                   >
-                    <div className="grid gap-3">
+                    <div className="grid gap-3 pt-5">
                       <a
                         href={`mailto:${person.email}`}
                         onClick={(e) => e.stopPropagation()}

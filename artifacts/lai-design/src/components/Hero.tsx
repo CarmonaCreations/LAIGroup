@@ -18,7 +18,7 @@ const companies = [
   },
   {
     name: "LAI Construction",
-    href: "https://lai-construction.com",
+    href: "#lai-construction",
     label: "Same company family",
     body: "Preconstruction, project delivery, and field execution.",
     action: "View construction",
@@ -27,7 +27,7 @@ const companies = [
   },
   {
     name: "LAI Civil",
-    href: "https://lai-civil.com",
+    href: "#lai-civil",
     label: "Same company family",
     body: "Civil engineering, site design, permitting, and infrastructure.",
     action: "View civil",
@@ -148,15 +148,15 @@ export function Hero() {
                 </span>
               );
 
-              return active ? (
-                <Link href={href} key={name}>
-                  {content}
-                </Link>
-              ) : (
-                <a href={href} key={name}>
-                  {content}
-                </a>
-              );
+            return active ? (
+              <Link href={href} key={name}>
+                {content}
+              </Link>
+            ) : (
+              <a href={href} key={name} onClick={(event) => event.preventDefault()} aria-disabled="true">
+                {content}
+              </a>
+            );
             })}
           </div>
         </motion.div>

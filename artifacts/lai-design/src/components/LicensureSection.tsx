@@ -121,20 +121,20 @@ export function LicensureSection() {
 
         .license-map-shell svg .licensed-state {
           cursor: pointer;
-          fill: #76aefc !important;
+          fill: #c9a86a !important;
           outline: none;
         }
 
         .license-map-shell svg .licensed-state:hover,
         .license-map-shell svg .licensed-state:focus-visible {
-          fill: #3b82f6 !important;
-          filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.72));
+          fill: #b88a3d !important;
+          filter: drop-shadow(0 0 5px rgba(201, 168, 106, 0.72));
         }
 
         .license-map-shell[data-selected="FL"] svg .fl,
         .license-map-shell[data-selected="SC"] svg .sc {
-          fill: #2563eb !important;
-          filter: drop-shadow(0 0 7px rgba(37, 99, 235, 0.78));
+          fill: #9d6f2f !important;
+          filter: drop-shadow(0 0 7px rgba(201, 168, 106, 0.78));
         }
       `}</style>
 
@@ -201,7 +201,7 @@ export function LicensureSection() {
 
             <div className="mt-5 flex flex-wrap items-center justify-center gap-6 border-t border-black/10 pt-4">
               <span className="inline-flex items-center gap-2 font-sans text-xs font-semibold text-[#1f2937]">
-                <span className="h-4 w-4 rounded-sm bg-[#2563eb]" />
+                <span className="h-4 w-4 rounded-sm bg-[#9d6f2f]" />
                 Licensed
               </span>
               <span className="inline-flex items-center gap-2 font-sans text-xs font-semibold text-[#1f2937]">

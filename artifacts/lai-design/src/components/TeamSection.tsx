@@ -8,7 +8,7 @@ const architects = [
     name: "Marco Alvarez",
     role: "Principal Architect",
     focus: "Client strategy, architectural direction, and complex commercial programs.",
-    lens: "Turns early ambition into clear decisions clients and builders can trust.",
+    bio: "Marco leads complex commercial projects with a steady hand, translating client goals into clear design direction.",
     outsideStudio: "Weekend sketchbooks, local coffee counters, and studying how cities age.",
     email: "marco@laidesignassoc.com",
     phone: "239-405-6888",
@@ -20,7 +20,7 @@ const architects = [
     name: "Sofia Chen",
     role: "Design Director",
     focus: "Concept development, spatial experience, material systems, and design reviews.",
-    lens: "Looks for warmth, restraint, and the moment a building starts to feel inevitable.",
+    bio: "Sofia shapes early concepts into refined spaces with an eye for material warmth, proportion, and user experience.",
     outsideStudio: "Ceramics, garden walks, and collecting texture references while traveling.",
     email: "sofia@laidesignassoc.com",
     phone: "239-405-6888",
@@ -32,7 +32,7 @@ const architects = [
     name: "James Whitfield",
     role: "Project Architect",
     focus: "Documentation, consultant coordination, permitting, and construction-phase support.",
-    lens: "Keeps design intent intact while coordinating the thousand details that make it real.",
+    bio: "James guides projects through documentation and coordination so the original design intent carries into construction.",
     outsideStudio: "Drone photography, woodworking, and quiet hikes before busy project weeks.",
     email: "james@laidesignassoc.com",
     phone: "239-405-6888",
@@ -138,7 +138,7 @@ export function TeamSection() {
                   <div>
                     <h3 className="font-display text-4xl leading-none text-white md:text-5xl">{person.name}</h3>
                     <p className="mt-4 max-w-sm font-sans text-sm leading-6 text-white/68">
-                      {person.lens}
+                      {person.bio}
                     </p>
                   </div>
 

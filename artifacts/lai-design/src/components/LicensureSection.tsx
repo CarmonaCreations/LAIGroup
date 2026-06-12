@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { BadgeCheck, FileText, MapPinned } from "lucide-react";
+import { geoPath } from "d3-geo";
+import { feature } from "topojson-client";
+import statesTopology from "us-atlas/states-10m.json";
+
+type LicensedStateKey = "FL" | "SC";
+type StateFeature = {
+  id?: string | number;
+  properties?: { name?: string };
+};
 
 const licensedStates = {
   FL: {
@@ -11,6 +20,11 @@ const licensedStates = {
     name: "South Carolina",
     note: "Architectural services represented for South Carolina projects. Add verified license numbers before publishing.",
   },
+};
+
+const stateIdToLicenseKey: Record<string, LicensedStateKey> = {
+  "12": "FL",
+  "45": "SC",
 };
 
 const licenseRecords = [
@@ -29,10 +43,15 @@ const licenseRecords = [
 ];
 
 export function LicensureSection() {
-  const [selectedState, setSelectedState] = useState<keyof typeof licensedStates>("FL");
+  const [selectedState, setSelectedState] = useState<LicensedStateKey>("FL");
   const selected = licensedStates[selectedState];
-  const isFlorida = selectedState === "FL";
-  const isSouthCarolina = selectedState === "SC";
+  const path = geoPath();
+  const states = (
+    (feature as (topology: unknown, object: unknown) => { features: StateFeature[] })(
+      statesTopology,
+      (statesTopology as { objects: { states: unknown } }).objects.states,
+    )
+  ).features;
 
   return (
     <section className="border-t border-border bg-[#11100d] px-6 py-24 text-white md:py-32">
@@ -77,74 +96,47 @@ export function LicensureSection() {
             <MapPinned className="h-8 w-8 text-[#c9a86a]" />
           </div>
 
-          <div className="relative overflow-hidden border border-white/12 bg-[#171612] p-3 md:p-5">
-            <svg viewBox="0 0 980 620" role="img" aria-label="United States map highlighting Florida and South Carolina" className="h-auto w-full">
-              <rect width="980" height="620" fill="#171612" />
-              <path
-                d="M96 205 L132 145 L208 119 L288 132 L365 118 L458 136 L548 122 L632 148 L716 145 L822 181 L893 235 L850 281 L790 288 L745 330 L672 341 L637 384 L548 392 L488 424 L388 418 L310 397 L245 415 L178 379 L147 310 L101 280 Z"
-                fill="#25231d"
-                stroke="#4d493e"
-                strokeWidth="3"
-              />
-              <path d="M118 444 L178 416 L250 435 L282 491 L198 523 L120 500 Z" fill="#211f1a" stroke="#4d493e" strokeWidth="3" />
-              <path d="M307 506 L338 493 L375 507 L358 531 L321 530 Z" fill="#211f1a" stroke="#4d493e" strokeWidth="3" />
+          <div className="relative overflow-hidden border border-white/12 bg-[#f5f4f1] p-4 md:p-6">
+            <svg viewBox="0 0 975 610" role="img" aria-label="United States map highlighting Florida and South Carolina" className="h-auto w-full drop-shadow-sm">
+              {states.map((state) => {
+                const id = String(state.id).padStart(2, "0");
+                const stateKey = stateIdToLicenseKey[id];
+                const licensed = Boolean(stateKey);
+                const selectedLocation = stateKey === selectedState;
+                const stateName = stateKey ? licensedStates[stateKey].name : state.properties?.name;
 
-              <path d="M205 126 L195 386" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
-              <path d="M305 130 L292 397" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
-              <path d="M410 128 L402 418" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
-              <path d="M520 130 L516 395" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
-              <path d="M632 150 L624 355" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
-              <path d="M735 160 L708 330" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
-              <path d="M120 235 L855 245" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
-              <path d="M142 316 L752 322" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
-              <path d="M197 385 L590 386" stroke="#3b382f" strokeWidth="2" opacity="0.55" />
-
-              <g
-                role="button"
-                tabIndex={0}
-                onClick={() => setSelectedState("SC")}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") setSelectedState("SC");
-                }}
-                className="cursor-pointer outline-none"
-                aria-label="Select South Carolina"
-              >
-                <path
-                  d="M734 294 L783 285 L822 313 L790 350 L737 338 L712 316 Z"
-                  fill={isSouthCarolina ? "#c9a86a" : "#8b7345"}
-                  stroke={isSouthCarolina ? "#fff4d8" : "#c9a86a"}
-                  strokeWidth="4"
-                />
-                <circle cx="766" cy="316" r={isSouthCarolina ? "10" : "7"} fill="#ffffff" />
-                <text x="739" y="275" fill="#ffffff" fontSize="24" fontFamily="Inter, sans-serif" fontWeight="700">SC</text>
-              </g>
-
-              <g
-                role="button"
-                tabIndex={0}
-                onClick={() => setSelectedState("FL")}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") setSelectedState("FL");
-                }}
-                className="cursor-pointer outline-none"
-                aria-label="Select Florida"
-              >
-                <path
-                  d="M691 386 L792 398 L830 445 L842 536 L811 557 L775 482 L717 450 Z"
-                  fill={isFlorida ? "#c9a86a" : "#8b7345"}
-                  stroke={isFlorida ? "#fff4d8" : "#c9a86a"}
-                  strokeWidth="4"
-                />
-                <path d="M820 516 C861 528 889 552 907 585" fill="none" stroke={isFlorida ? "#fff4d8" : "#c9a86a"} strokeWidth="5" strokeLinecap="round" />
-                <circle cx="765" cy="432" r={isFlorida ? "10" : "7"} fill="#ffffff" />
-                <text x="728" y="477" fill="#ffffff" fontSize="24" fontFamily="Inter, sans-serif" fontWeight="700">FL</text>
-              </g>
-
-              <text x="146" y="474" fill="#716d61" fontSize="20" fontFamily="Inter, sans-serif" fontWeight="700">AK</text>
-              <text x="325" y="526" fill="#716d61" fontSize="20" fontFamily="Inter, sans-serif" fontWeight="700">HI</text>
-              <text x="646" y="368" fill="#716d61" fontSize="17" fontFamily="Inter, sans-serif">GA</text>
-              <text x="805" y="284" fill="#716d61" fontSize="17" fontFamily="Inter, sans-serif">NC</text>
+                return (
+                  <path
+                    key={id}
+                    d={path(state as never) ?? ""}
+                    role={licensed ? "button" : "presentation"}
+                    tabIndex={licensed ? 0 : -1}
+                    onClick={() => stateKey && setSelectedState(stateKey)}
+                    onKeyDown={(event) => {
+                      if (stateKey && (event.key === "Enter" || event.key === " ")) {
+                        setSelectedState(stateKey);
+                      }
+                    }}
+                    className={`transition-colors duration-200 ${licensed ? "cursor-pointer hover:brightness-105" : "cursor-default"}`}
+                    fill={licensed ? (selectedLocation ? "#3b82f6" : "#76aefc") : "#d9d9d6"}
+                    stroke="#ffffff"
+                    strokeWidth={selectedLocation ? 1.4 : 0.85}
+                    aria-label={licensed ? `${stateName} licensed state` : undefined}
+                  />
+                );
+              })}
             </svg>
+
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-6 border-t border-black/10 pt-4">
+              <span className="inline-flex items-center gap-2 font-sans text-xs font-semibold text-[#1f2937]">
+                <span className="h-4 w-4 rounded-sm bg-[#3b82f6]" />
+                Licensed
+              </span>
+              <span className="inline-flex items-center gap-2 font-sans text-xs font-semibold text-[#1f2937]">
+                <span className="h-4 w-4 rounded-sm border border-black/10 bg-[#d9d9d6]" />
+                Not Licensed
+              </span>
+            </div>
           </div>
 
           <div className="mt-6 border border-white/12 p-5">
@@ -172,7 +164,7 @@ export function LicensureSection() {
           <div className="mt-6 flex items-start gap-3 border-t border-white/12 pt-5">
             <FileText className="mt-1 h-4 w-4 shrink-0 text-[#c9a86a]" />
             <p className="font-sans text-xs leading-6 text-white/52">
-              This map uses a simplified geographic silhouette for readability while preserving the recognizable United States shape. Add verified license numbers and certificate details before publishing if required by each state board.
+              This map uses accurate state shapes and highlights current licensed states. Add verified license numbers and certificate details before publishing if required by each state board.
             </p>
           </div>
         </motion.div>

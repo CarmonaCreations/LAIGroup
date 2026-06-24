@@ -7,6 +7,7 @@ import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { SiteFooter } from "@/components/SiteFooter";
 import { TimeLapse } from "@/components/TimeLapse";
+import { LicensureMap } from "@/components/LicensureMap";
 
 import innovationPrep from "@assets/Innovation-Preparatory-Academy_1773411287414.jpg";
 import arthrexAMIE from "@assets/Arthrex-AMIE_1773411287409.jpg";
@@ -108,6 +109,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <LicensureMap />
 
       {/* Featured Projects */}
       <section className="py-24 md:py-32 px-6 bg-muted">

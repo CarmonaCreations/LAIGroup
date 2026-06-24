@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
+import { Mail, Phone } from "lucide-react";
 
 const architects = [
   {
     id: "marco",
     name: "Marco Alvarez",
     role: "Principal Architect",
+    email: "marco@laidesignassoc.com",
+    phone: "239-405-6888",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
     collage: [
       "https://images.unsplash.com/photo-1498409785966-ab341407de6e?auto=format&fit=crop&q=80&w=400",
@@ -17,6 +20,8 @@ const architects = [
     id: "sofia",
     name: "Sofia Chen",
     role: "Design Director",
+    email: "sofia@laidesignassoc.com",
+    phone: "239-405-6888",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800",
     collage: [
       "https://picsum.photos/seed/travel1/400/300",
@@ -29,6 +34,8 @@ const architects = [
     id: "james",
     name: "James Whitfield",
     role: "Project Architect",
+    email: "james@laidesignassoc.com",
+    phone: "239-405-6888",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800",
     collage: [
       "https://picsum.photos/seed/mountain5/400/300",
@@ -110,6 +117,26 @@ export function TeamSection() {
                   </div>
                 </div>
 
+              </div>
+              <div className="mt-4 border border-border bg-card/90 p-4 shadow-lg shadow-black/10">
+                <h3 className="font-display text-xl text-foreground">{person.name}</h3>
+                <p className="font-sans text-xs text-primary tracking-widest uppercase">{person.role}</p>
+                <div className="mt-4 grid gap-2">
+                  <a
+                    href={`mailto:${person.email}`}
+                    className="inline-flex items-center gap-2 font-sans text-sm text-foreground transition-colors hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                  >
+                    <Mail className="h-4 w-4 flex-shrink-0 text-primary" aria-hidden="true" />
+                    <span className="truncate">{person.email}</span>
+                  </a>
+                  <a
+                    href={`tel:${person.phone.replace(/[^0-9+]/g, "")}`}
+                    className="inline-flex items-center gap-2 font-sans text-sm text-muted-foreground transition-colors hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                  >
+                    <Phone className="h-4 w-4 flex-shrink-0 text-primary" aria-hidden="true" />
+                    <span>{person.phone}</span>
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}

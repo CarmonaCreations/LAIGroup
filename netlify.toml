@@ -1,0 +1,7 @@
+﻿[build]
+  command = "PORT=5173 BASE_PATH=/ pnpm --filter @workspace/lai-design... run build"
+  publish = "artifacts/lai-design/dist/public"
+
+[build.environment]
+  NODE_VERSION = "22"
+  PNPM_VERSION = "10.25.0"

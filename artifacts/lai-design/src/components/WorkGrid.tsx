@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+﻿import { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Building2, CalendarDays, Layers3, MapPin, Ruler } from "lucide-react";
 
 import arthrexAMIE from "@assets/Arthrex-AMIE_1773411287409.jpg";
 import arthrexAMISC from "@assets/Arthrex-AMISC_1773411287410.jpg";
@@ -17,259 +17,226 @@ const projects = [
   {
     id: 1,
     title: "Innovation Preparatory Academy",
-    type: "Education / Fort Myers, FL",
+    market: "Education",
+    location: "Fort Myers, FL",
     image: innovationPrep,
     cost: "$13M",
     size: "69,850 sq ft",
     completed: "August 2020",
-    description: "LAI partnered with Charter Schools USA and Ryan Companies to provide design engineering services for this two-story school, including a circular stairway and indoor track.",
-    span: "md:col-span-7",
-    aspect: "aspect-[16/10]",
+    description: "A two-story campus with a circular stairway, indoor track, and coordinated learning environments designed with delivery and constructability in mind.",
   },
   {
     id: 2,
     title: "Henderson Hammock Charter School",
-    type: "Education / SWFL",
+    market: "Education",
+    location: "Southwest Florida",
     image: hendersonHammock,
     cost: "$11M",
     size: "65,000 sq ft",
     completed: "July 2011",
-    description: "LAI provided design engineering services in partnership with Charter Schools USA. Unique challenges included designing around wetlands on the property.",
-    span: "md:col-span-5",
-    aspect: "aspect-[4/3]",
+    description: "A charter school delivered around sensitive site constraints, including wetlands that shaped the building placement and coordination strategy.",
   },
   {
     id: 3,
     title: "Cape Coral Animal Shelter",
-    type: "Civic / Cape Coral, FL",
+    market: "Civic",
+    location: "Cape Coral, FL",
     image: capeCoralShelter,
     cost: "$1.7M",
     size: "7,800 sq ft",
     completed: "March 2020",
-    description: "LAI provided design engineering and construction management pro bono for the first no-kill animal shelter in Cape Coral, featuring public, clinical, and animal care spaces.",
-    span: "md:col-span-4",
-    aspect: "aspect-[4/5]",
+    description: "Public, clinical, and animal care spaces planned for clear operations and a welcoming community-facing experience.",
   },
   {
     id: 4,
     title: "Athenian Academy - Fort Myers",
-    type: "Education / Fort Myers, FL",
+    market: "Education",
+    location: "Fort Myers, FL",
     image: athenianAcademy,
     cost: "$13.2M",
     size: "68,950 sq ft",
     completed: "August 2020",
-    description: "Design engineering and construction management for Athenian Academy's second campus, including learning, play, athletics, and covered outdoor program areas.",
-    span: "md:col-span-4",
-    aspect: "aspect-[4/5]",
+    description: "A campus for learning, athletics, play, and covered outdoor programming, coordinated from design through construction management.",
   },
   {
     id: 5,
     title: "Hollywood Academy of Arts & Sciences",
-    type: "Education / Hollywood, FL",
+    market: "Education",
+    location: "Hollywood, FL",
     image: hollywoodAcademy,
     cost: "$14M",
     size: "110,000 gsf",
     completed: "August 2012",
-    description: "LEED registered four-story elementary school for 1,400 students with classrooms, administration, multi-purpose dining, and rooftop outdoor teaching areas.",
-    span: "md:col-span-4",
-    aspect: "aspect-[4/5]",
+    description: "A four-story elementary school for 1,400 students with administration, dining, classroom, and rooftop teaching areas.",
   },
   {
     id: 6,
     title: "Club Paragon",
-    type: "Commercial / SWFL",
+    market: "Commercial",
+    location: "Southwest Florida",
     image: clubParagon,
     cost: "$1.5M",
     size: "6,000 sq ft",
     completed: "June 1989",
-    description: "Design/build construction of a restaurant remodeling and addition.",
-    span: "md:col-span-6",
-    aspect: "aspect-[4/3]",
+    description: "A restaurant remodel and addition shaped by hospitality function, schedule sensitivity, and design/build coordination.",
   },
   {
     id: 7,
     title: "Vincent Park",
-    type: "Commercial / SWFL",
+    market: "Commercial",
+    location: "Southwest Florida",
     image: vincentPark,
     cost: "$6.5M",
-    size: "Five Buildings / 50,000 gsf",
+    size: "Five buildings / 50,000 gsf",
     completed: "August 1999",
-    description: "Design/build construction of five two-story Class A office buildings at 10,800 sq ft each.",
-    span: "md:col-span-6",
-    aspect: "aspect-[4/3]",
+    description: "A Class A office park organized as five two-story buildings, balancing repeatable systems with a professional campus presence.",
   },
   {
     id: 8,
     title: "Arthrex Manufacturing",
-    type: "Industrial / South Carolina",
+    market: "Industrial",
+    location: "South Carolina",
     image: arthrexMfg,
     cost: "$8M",
     size: "36,000 gsf",
     completed: "June 2019",
-    description: "Programming and design of a two-story building providing services to the Arthrex South Carolina Campus.",
-    span: "md:col-span-4",
-    aspect: "aspect-[4/3]",
+    description: "Programming and design for a two-story building supporting the Arthrex South Carolina campus and its operational needs.",
   },
   {
     id: 9,
     title: "Arthrex AMISC",
-    type: "Medical Manufacturing / South Carolina",
+    market: "Medical Manufacturing",
+    location: "South Carolina",
     image: arthrexAMISC,
     cost: "$39M",
     size: "253,000 gsf",
     completed: "June 2019",
-    description: "Programming and design of the expansion of Arthrex's medical manufacturing facility to South Carolina.",
-    span: "md:col-span-4",
-    aspect: "aspect-[4/3]",
+    description: "A major medical manufacturing expansion with disciplined planning, technical coordination, and room for future operational growth.",
   },
   {
     id: 10,
     title: "Arthrex AMIE",
-    type: "Medical Manufacturing / Southwest FL",
+    market: "Medical Manufacturing",
+    location: "Southwest Florida",
     image: arthrexAMIE,
     cost: "$36M",
     size: "400,000 gsf",
     completed: "November 2012",
-    description: "Programming and design of a landmark medical manufacturing facility for Arthrex, providing quality products and educational services for orthopaedic surgeons worldwide.",
-    span: "md:col-span-4",
-    aspect: "aspect-[4/3]",
+    description: "A landmark facility supporting medical manufacturing, education, and the precise workflows behind orthopaedic product development.",
   },
 ];
 
+const marketSummary = [
+  { label: "Education", count: "5" },
+  { label: "Medical + Industrial", count: "3" },
+  { label: "Civic + Commercial", count: "2" },
+];
+
 export function WorkGrid() {
-  const [activeProject, setActiveProject] = useState<number | null>(null);
-
-  const openLightbox = (index: number) => setActiveProject(index);
-  const closeLightbox = () => setActiveProject(null);
-
-  const nextProject = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (activeProject !== null) {
-      setActiveProject((activeProject + 1) % projects.length);
-    }
-  };
-
-  const prevProject = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (activeProject !== null) {
-      setActiveProject((activeProject - 1 + projects.length) % projects.length);
-    }
-  };
+  const [selectedId, setSelectedId] = useState(projects[0].id);
+  const selected = projects.find((project) => project.id === selectedId) ?? projects[0];
 
   return (
-    <section id="work" className="mx-auto max-w-[1400px] bg-background px-4 py-16 md:px-6 md:py-24">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-6">
-        {projects.map((project, index) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: index * 0.05 }}
-            className={`${project.span} ${project.aspect} group relative cursor-pointer overflow-hidden bg-muted`}
-            onClick={() => openLightbox(index)}
-          >
-            <img
-              src={project.image}
-              alt={project.title}
-              loading={index < 2 ? "eager" : "lazy"}
-              className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 flex flex-col justify-end bg-black/65 p-8 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-              <p className="mb-2 translate-y-4 font-sans text-xs uppercase tracking-[0.2em] text-white/65 transition-transform delay-100 duration-500 group-hover:translate-y-0">
-                {project.type}
-              </p>
-              <h3 className="translate-y-4 font-display text-2xl text-white transition-transform duration-500 group-hover:translate-y-0 md:text-3xl">
-                {project.title}
-              </h3>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      <AnimatePresence>
-        {activeProject !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm md:p-10"
-            onClick={closeLightbox}
-          >
-            <button
-              onClick={prevProject}
-              className="absolute left-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-foreground shadow-md transition-all hover:bg-white md:left-6"
-              aria-label="Previous project"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button
-              onClick={nextProject}
-              className="absolute right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-foreground shadow-md transition-all hover:bg-white md:right-6"
-              aria-label="Next project"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-
-            <motion.div
-              key={activeProject}
-              initial={{ opacity: 0, scale: 0.96, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full max-w-4xl overflow-hidden bg-white shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative aspect-[16/7] overflow-hidden">
-                <img src={projects[activeProject].image} alt={projects[activeProject].title} className="h-full w-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-                <button
-                  onClick={closeLightbox}
-                  className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center bg-white/15 text-white backdrop-blur-md transition-colors hover:bg-white/25"
-                  aria-label="Close project details"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-                <div className="absolute bottom-5 left-7">
-                  <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.2em] text-white/65">
-                    {projects[activeProject].type}
-                  </p>
-                  <h3 className="font-display text-2xl text-white md:text-3xl">
-                    {projects[activeProject].title}
-                  </h3>
-                </div>
+    <section id="work" className="bg-background px-4 py-14 md:px-6 md:py-20">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-12 grid gap-8 lg:grid-cols-[0.82fr_1fr] lg:items-end">
+          <div>
+            <p className="mb-4 font-sans text-[11px] font-extrabold uppercase tracking-[0.35em] text-primary">Selected Work</p>
+            <h2 className="max-w-3xl font-display text-4xl leading-tight text-foreground md:text-6xl">
+              Built work indexed by scale, use, and technical demand.
+            </h2>
+          </div>
+          <div className="grid grid-cols-3 border border-border bg-white/55">
+            {marketSummary.map((item) => (
+              <div key={item.label} className="border-r border-border p-4 last:border-r-0 md:p-6">
+                <p className="font-display text-3xl text-primary md:text-4xl">{item.count}</p>
+                <p className="mt-2 font-sans text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">{item.label}</p>
               </div>
+            ))}
+          </div>
+        </div>
 
-              <div className="p-7 md:p-10">
-                <p className="mb-8 font-sans text-sm leading-relaxed text-muted-foreground md:text-base">
-                  {projects[activeProject].description}
-                </p>
-                <div className="grid grid-cols-3 gap-4 border-t border-border pt-7">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(420px,0.95fr)] lg:items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7 }}
+            className="border-y border-border"
+          >
+            {projects.map((project, index) => {
+              const isSelected = project.id === selected.id;
+
+              return (
+                <button
+                  key={project.id}
+                  type="button"
+                  onClick={() => setSelectedId(project.id)}
+                  className={`grid w-full gap-4 border-b border-border py-5 text-left transition-colors last:border-b-0 md:grid-cols-[48px_1fr_auto] md:items-center md:px-4 ${
+                    isSelected ? "bg-primary/8" : "hover:bg-white/70"
+                  }`}
+                  aria-pressed={isSelected}
+                >
+                  <span className="font-sans text-xs font-extrabold tracking-[0.18em] text-primary/70">{String(index + 1).padStart(2, "0")}</span>
+                  <span>
+                    <span className="block font-display text-xl leading-tight text-foreground md:text-2xl">{project.title}</span>
+                    <span className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-sans text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                      <span>{project.market}</span>
+                      <span className="flex items-center gap-1.5 normal-case tracking-normal"><MapPin className="h-3.5 w-3.5" /> {project.location}</span>
+                    </span>
+                  </span>
+                  <span className={`hidden h-10 w-10 items-center justify-center border md:flex ${isSelected ? "border-primary bg-primary text-white" : "border-border text-primary"}`}>
+                    <ArrowUpRight className="h-4 w-4" />
+                  </span>
+                </button>
+              );
+            })}
+          </motion.div>
+
+          <motion.aside
+            key={selected.id}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35 }}
+            className="lg:sticky lg:top-28"
+          >
+            <div className="overflow-hidden border border-border bg-white/80 shadow-[0_24px_80px_rgba(22,96,132,0.12)]">
+              <div className="aspect-[4/3] overflow-hidden bg-muted md:aspect-[16/11]">
+                <img src={selected.image} alt={selected.title} className="h-full w-full object-cover" />
+              </div>
+              <div className="p-6 md:p-8">
+                <div className="mb-5 flex flex-wrap gap-2">
+                  <span className="border border-primary/25 bg-primary/10 px-3 py-1 font-sans text-[10px] font-extrabold uppercase tracking-[0.2em] text-primary">{selected.market}</span>
+                  <span className="border border-border bg-background px-3 py-1 font-sans text-[10px] font-extrabold uppercase tracking-[0.2em] text-muted-foreground">{selected.location}</span>
+                </div>
+                <h3 className="font-display text-3xl leading-tight text-foreground md:text-4xl">{selected.title}</h3>
+                <p className="mt-4 font-sans text-sm leading-7 text-muted-foreground md:text-base">{selected.description}</p>
+
+                <div className="mt-7 grid gap-px bg-border sm:grid-cols-3">
                   {[
-                    { label: "Cost", value: projects[activeProject].cost },
-                    { label: "Size", value: projects[activeProject].size },
-                    { label: "Completed", value: projects[activeProject].completed },
+                    { icon: Building2, label: "Cost", value: selected.cost },
+                    { icon: Ruler, label: "Size", value: selected.size },
+                    { icon: CalendarDays, label: "Completed", value: selected.completed },
                   ].map((stat) => (
-                    <div key={stat.label}>
-                      <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.25em] text-muted-foreground">{stat.label}</p>
-                      <p className="font-sans text-sm font-medium text-foreground">{stat.value}</p>
+                    <div key={stat.label} className="bg-white/85 p-4">
+                      <stat.icon className="mb-3 h-4 w-4 text-primary" />
+                      <p className="font-sans text-[10px] font-extrabold uppercase tracking-[0.22em] text-muted-foreground">{stat.label}</p>
+                      <p className="mt-1 font-sans text-sm font-semibold text-foreground">{stat.value}</p>
                     </div>
                   ))}
                 </div>
-                <div className="mt-6 flex justify-end border-t border-border pt-6">
-                  <button
-                    onClick={closeLightbox}
-                    className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    Close
-                  </button>
-                </div>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+
+            <div className="mt-4 flex items-center gap-3 border border-border bg-primary/8 p-4 text-primary">
+              <Layers3 className="h-5 w-5 shrink-0" />
+              <p className="font-sans text-sm font-semibold leading-6">Compare type, location, scale, and delivery context in one sharp view.</p>
+            </div>
+          </motion.aside>
+        </div>
+      </div>
     </section>
   );
 }
+
+

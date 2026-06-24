@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+﻿import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { Instagram, Linkedin, ArrowRight, CheckCircle2 } from "lucide-react";
@@ -24,7 +24,7 @@ export function ContactFooter() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-16">
           
-          {/* Left Column: Info — moves below form on mobile */}
+          {/* Left Column: Info â€” moves below form on mobile */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -48,26 +48,26 @@ export function ContactFooter() {
             </div>
 
             <div className="flex space-x-6 mt-12">
-              <a href="https://www.instagram.com/laigroupfl/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
+              <a href="https://www.instagram.com/laigroupfl/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="https://www.linkedin.com/company/lai-design-associates-llc/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
+              <a href="https://www.linkedin.com/company/lai-design-associates-llc/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </motion.div>
 
-          {/* Right Column: Form — shows first on mobile */}
+          {/* Right Column: Form â€” shows first on mobile */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="order-1 lg:order-2 bg-muted p-8 md:p-12 rounded-2xl border border-border shadow-sm"
+            className="order-1 lg:order-2 option3-panel bg-white/72 p-8 md:p-12 border border-white shadow-[0_24px_80px_rgba(16,72,102,0.12)]"
           >
             {submitMutation.isSuccess ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-20">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                <div className="w-20 h-20 bg-primary/10 flex items-center justify-center mb-6">
                   <CheckCircle2 className="w-10 h-10 text-primary" />
                 </div>
                 <h3 className="font-display text-3xl text-foreground mb-4">Inquiry Received</h3>
@@ -145,7 +145,7 @@ export function ContactFooter() {
                   className="w-full bg-primary text-primary-foreground font-sans font-medium tracking-widest uppercase py-5 mt-4 hover:bg-foreground hover:text-background transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center"
                 >
                   {submitMutation.isPending ? (
-                    <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground animate-spin" />
                   ) : "Submit Inquiry"}
                 </button>
               </form>
@@ -178,3 +178,4 @@ function ChevronDownIcon() {
     </svg>
   );
 }
+

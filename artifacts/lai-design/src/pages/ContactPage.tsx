@@ -1,6 +1,7 @@
-import { Helmet } from "react-helmet-async";
+﻿import { Helmet } from "react-helmet-async";
 import { Nav } from "@/components/Nav";
 import { ContactFooter } from "@/components/ContactFooter";
+import { BrandMark } from "@/components/BrandMark";
 
 export default function ContactPage() {
   return (
@@ -15,13 +16,22 @@ export default function ContactPage() {
 
       <Nav />
 
-      <div className="mx-auto max-w-7xl bg-background px-6 pb-0 pt-28">
-        <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.35em] text-muted-foreground">Get in Touch</p>
-        <h1 className="font-display text-5xl text-foreground md:text-6xl">Start a Project</h1>
-        <div className="mt-6 h-px w-14 bg-primary" />
-      </div>
+      <main className="bg-background">
+        <section className="option3-wash px-6 pb-10 pt-36 md:pb-14 md:pt-44">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[auto_1fr] lg:items-end">
+            <BrandMark className="h-24 w-24" />
+            <div>
+              <p className="mb-4 font-sans text-[11px] font-extrabold uppercase tracking-[0.35em] text-primary">Contact</p>
+              <h1 className="max-w-4xl font-display text-5xl leading-tight text-foreground md:text-7xl">
+                Start with the studio. Route the project from there.
+              </h1>
+            </div>
+          </div>
+        </section>
 
-      <ContactFooter />
+        <ContactFooter />
+      </main>
     </>
   );
 }
+

@@ -8,11 +8,9 @@ import arthrexMfg from "@assets/Arthrex-Manufacturing_1773411287410.jpg";
 import athenianAcademy from "@assets/Athenian-Academy-FM_1773411287411.jpg";
 import capeCoralShelter from "@assets/Cape-Coral-Animal-Shelter_1773411287411.jpg";
 import clubParagon from "@assets/Club-Paragon_1773411287411.jpg";
-import foxbrookSenior from "@assets/Foxbrook-Senior-Center_1773411287412.jpg";
 import hendersonHammock from "@assets/Henderson-Hammock-Charter-School_1773411287412.jpg";
 import hollywoodAcademy from "@assets/Hollywood-Academy-Of-Arts-Sciences_1773411287413.jpg";
 import innovationPrep from "@assets/Innovation-Preparatory-Academy_1773411287414.jpg";
-import miromarLakes from "@assets/Miromar-Lakes_1773411287414.jpg";
 import vincentPark from "@assets/Vincent-Park_1773411287415.jpg";
 
 // Portfolio Data
@@ -28,18 +26,6 @@ const projects = [
     description: "LAI partnered with Charter Schools USA and Ryan Companies to provide design engineering services for this two-story school, including a circular stairway and indoor track.",
     span: "md:col-span-7",
     aspect: "aspect-[16/10]"
-  },
-  {
-    id: 2,
-    title: "Miromar Lakes",
-    type: "Residential · Miromar Lakes, FL",
-    image: miromarLakes,
-    cost: "$1.4M",
-    size: "3,600 sq ft",
-    completed: "April 2019",
-    description: "LAI performed a design/build remodel of this stunning single-family home.",
-    span: "md:col-span-5",
-    aspect: "aspect-[4/3]"
   },
   {
     id: 3,
@@ -87,18 +73,6 @@ const projects = [
     completed: "August 2012",
     description: "LEED registered four-story elementary school for 1,400 students. Features classrooms, administration, multi-purpose cafeteria, rooftop outdoor teaching and play areas.",
     span: "md:col-span-5",
-    aspect: "aspect-[16/10]"
-  },
-  {
-    id: 7,
-    title: "Fox Brook Senior Center",
-    type: "Residential · SWFL",
-    image: foxbrookSenior,
-    cost: "$12.3M",
-    size: "42,000 sq ft",
-    completed: "November 1999",
-    description: "Design/build construction of a three-story senior apartment building with 72 units and underground parking.",
-    span: "md:col-span-7",
     aspect: "aspect-[16/10]"
   },
   {

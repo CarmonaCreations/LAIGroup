@@ -109,8 +109,9 @@ export function ContactFooter() {
                     className="w-full bg-transparent border-b border-border py-4 text-foreground focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer"
                   >
                     <option value="" disabled className="bg-card text-muted-foreground">Select Project Type...</option>
-                    <option value="residential" className="bg-card">Residential</option>
                     <option value="commercial" className="bg-card">Commercial</option>
+                    <option value="education" className="bg-card">Education</option>
+                    <option value="industrial" className="bg-card">Industrial / Manufacturing</option>
                     <option value="mixed-use" className="bg-card">Mixed-Use</option>
                     <option value="civic" className="bg-card">Civic / Community</option>
                   </select>

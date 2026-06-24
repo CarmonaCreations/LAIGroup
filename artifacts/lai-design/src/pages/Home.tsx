@@ -11,8 +11,8 @@ import { LicensureMap } from "@/components/LicensureMap";
 
 import innovationPrep from "@assets/Innovation-Preparatory-Academy_1773411287414.jpg";
 import arthrexAMIE from "@assets/Arthrex-AMIE_1773411287409.jpg";
-import miromarLakes from "@assets/Miromar-Lakes_1773411287414.jpg";
 import arthrexAMISC from "@assets/Arthrex-AMISC_1773411287410.jpg";
+import hollywoodAcademy from "@assets/Hollywood-Academy-Of-Arts-Sciences_1773411287413.jpg";
 
 const featured = [
   {
@@ -34,13 +34,13 @@ const featured = [
     description: "Programming and design of a landmark medical manufacturing facility for Arthrex, providing quality products and educational services for orthopaedic surgeons worldwide.",
   },
   {
-    title: "Miromar Lakes",
-    type: "Residential · Miromar Lakes, FL",
-    image: miromarLakes,
-    cost: "$1.4M",
-    size: "3,600 sq ft",
-    completed: "April 2019",
-    description: "LAI performed a design/build remodel of this stunning single-family home.",
+    title: "Hollywood Academy of Arts & Sciences",
+    type: "Education · Hollywood, FL",
+    image: hollywoodAcademy,
+    cost: "$14M",
+    size: "110,000 gsf",
+    completed: "August 2012",
+    description: "LEED registered four-story elementary school for 1,400 students, including classrooms, administration, multi-purpose cafeteria, and rooftop outdoor teaching and play areas.",
   },
   {
     title: "Arthrex AMISC",

@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 
-import miromarLakes from "@assets/Miromar-Lakes_1773411287414.jpg";
 import innovationPrep from "@assets/Innovation-Preparatory-Academy_1773411287414.jpg";
 import arthrexAMIE from "@assets/Arthrex-AMIE_1773411287409.jpg";
 import hollywoodAcademy from "@assets/Hollywood-Academy-Of-Arts-Sciences_1773411287413.jpg";
@@ -13,7 +12,6 @@ import clubParagon from "@assets/Club-Paragon_1773411287411.jpg";
 const slides = [
   { image: innovationPrep, label: "Innovation Preparatory Academy — Education" },
   { image: arthrexAMIE, label: "Arthrex AMIE — Medical Manufacturing" },
-  { image: miromarLakes, label: "Miromar Lakes — Residential" },
   { image: hollywoodAcademy, label: "Hollywood Academy of Arts & Sciences" },
   { image: arthrexAMISC, label: "Arthrex AMISC — South Carolina" },
   { image: clubParagon, label: "Club Paragon — Commercial" },

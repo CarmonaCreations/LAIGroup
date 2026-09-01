@@ -1,14 +1,19 @@
 import { motion } from "framer-motion";
 import { Mail, Phone } from "lucide-react";
+import bruceBanner from "@assets/team-bruce-banner-vertical.webp";
+import wandaMaximoff from "@assets/team-wanda-maximoff-vertical.webp";
+import tonyStark from "@assets/team-tony-stark-vertical.webp";
+import carolDanvers from "@assets/team-carol-danvers-vertical.webp";
+import hopeVanDyne from "@assets/team-hope-van-dyne-vertical.webp";
 
 const architects = [
   {
-    id: "marco",
-    name: "Marco Alvarez",
-    role: "Principal Architect",
-    email: "marco@laidesignassoc.com",
+    id: "bruce",
+    name: "Bruce Banner",
+    role: "Hulk",
+    email: "bruce@laidesignassoc.com",
     phone: "239-405-6888",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
+    image: bruceBanner,
     collage: [
       "https://images.unsplash.com/photo-1498409785966-ab341407de6e?auto=format&fit=crop&q=80&w=400",
       "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=400",
@@ -17,12 +22,12 @@ const architects = [
     ]
   },
   {
-    id: "sofia",
-    name: "Sofia Chen",
-    role: "Design Director",
-    email: "sofia@laidesignassoc.com",
+    id: "wanda",
+    name: "Wanda Maximoff",
+    role: "Scarlet Witch",
+    email: "wanda@laidesignassoc.com",
     phone: "239-405-6888",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800",
+    image: wandaMaximoff,
     collage: [
       "https://picsum.photos/seed/travel1/400/300",
       "https://picsum.photos/seed/garden2/400/300",
@@ -31,17 +36,45 @@ const architects = [
     ]
   },
   {
-    id: "james",
-    name: "James Whitfield",
-    role: "Project Architect",
-    email: "james@laidesignassoc.com",
+    id: "tony",
+    name: "Tony Stark",
+    role: "Iron Man",
+    email: "tony@laidesignassoc.com",
     phone: "239-405-6888",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800",
+    image: tonyStark,
     collage: [
       "https://picsum.photos/seed/mountain5/400/300",
       "https://picsum.photos/seed/drone6/400/300",
       "https://picsum.photos/seed/sport7/400/300",
       "https://picsum.photos/seed/wood8/400/300",
+    ]
+  },
+  {
+    id: "carol",
+    name: "Carol Danvers",
+    role: "Captain Marvel",
+    email: "carol@laidesignassoc.com",
+    phone: "239-405-6888",
+    image: carolDanvers,
+    collage: [
+      "https://picsum.photos/seed/planning9/400/300",
+      "https://picsum.photos/seed/material10/400/300",
+      "https://picsum.photos/seed/sketch11/400/300",
+      "https://picsum.photos/seed/city12/400/300",
+    ]
+  },
+  {
+    id: "hope",
+    name: "Hope van Dyne",
+    role: "Wasp",
+    email: "hope@laidesignassoc.com",
+    phone: "239-405-6888",
+    image: hopeVanDyne,
+    collage: [
+      "https://picsum.photos/seed/interior13/400/300",
+      "https://picsum.photos/seed/texture14/400/300",
+      "https://picsum.photos/seed/studio15/400/300",
+      "https://picsum.photos/seed/landscape16/400/300",
     ]
   }
 ];
@@ -63,8 +96,8 @@ export function TeamSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-          {architects.map((person, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          {[architects[1], architects[0], ...architects.slice(2)].map((person, i) => (
             <motion.div
               key={person.id}
               initial={{ opacity: 0, y: 50 }}
@@ -73,22 +106,38 @@ export function TeamSection() {
               transition={{ duration: 0.7, delay: i * 0.15 }}
               className="group perspective-1000 cursor-pointer"
             >
-              <div className="relative aspect-[3/4] w-full transform-style-3d transition-transform duration-1000 group-hover:rotate-y-180 shadow-2xl shadow-black/50">
+              <div className="relative aspect-[5/7] w-full transform-style-3d transition-transform duration-1000 group-hover:rotate-y-180 shadow-2xl shadow-black/50">
 
                 {/* FRONT: Portrait */}
-                <div className="absolute inset-0 backface-hidden bg-card overflow-hidden rounded-sm">
+                <div className="absolute inset-0 backface-hidden bg-white overflow-hidden rounded-sm">
                   <img
                     src={person.image}
                     alt={person.name}
                     loading="lazy"
                     referrerPolicy="no-referrer"
                     crossOrigin="anonymous"
-                    className="w-full h-full object-cover filter grayscale-[20%] contrast-110"
+                    className="w-full h-full object-contain object-center filter saturate-[0.88] contrast-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90" />
+                  <div
+                    className="absolute inset-x-0 bottom-0 h-[58%]"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(5, 20, 43, 0.98) 0%, rgba(5, 20, 43, 0.9) 24%, rgba(5, 20, 43, 0.54) 55%, transparent 100%)",
+                    }}
+                  />
                   <div className="absolute bottom-0 left-0 p-8">
-                    <h3 className="font-display text-2xl text-white mb-1">{person.name}</h3>
-                    <p className="font-sans text-xs text-primary tracking-widest uppercase">{person.role}</p>
+                    <h3
+                      className="font-display text-2xl text-white mb-1"
+                      style={{ textShadow: "0 2px 12px rgba(0, 0, 0, 0.75)" }}
+                    >
+                      {person.name}
+                    </h3>
+                    <p
+                      className="font-sans text-xs font-semibold text-sky-100 tracking-widest uppercase"
+                      style={{ textShadow: "0 1px 8px rgba(0, 0, 0, 0.8)" }}
+                    >
+                      {person.role}
+                    </p>
                   </div>
                 </div>
 

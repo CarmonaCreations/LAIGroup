@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 
 import arthrexAMIE from "@assets/Arthrex-AMIE_1773411287409.jpg";
 import arthrexAMISC from "@assets/Arthrex-AMISC_1773411287410.jpg";
@@ -137,8 +137,23 @@ const projects = [
   }
 ];
 
+const projectCategories = ["All", "Commercial", "Education", "Industrial", "Other"] as const;
+type ProjectCategory = (typeof projectCategories)[number];
+
+function getProjectCategory(type: string): Exclude<ProjectCategory, "All"> {
+  if (type.includes("Commercial")) return "Commercial";
+  if (type.includes("Education")) return "Education";
+  if (type.includes("Industrial") || type.includes("Manufacturing")) return "Industrial";
+  return "Other";
+}
+
 export function WorkGrid() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
+
+  const visibleProjects = projects
+    .map((project, index) => ({ project, index }))
+    .filter(({ project }) => activeCategory === "All" || getProjectCategory(project.type) === activeCategory);
 
   const openLightbox = (index: number) => setActiveProject(index);
   const closeLightbox = () => setActiveProject(null);
@@ -146,48 +161,102 @@ export function WorkGrid() {
   const nextProject = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (activeProject !== null) {
-      setActiveProject((activeProject + 1) % projects.length);
+      const currentPosition = visibleProjects.findIndex(({ index }) => index === activeProject);
+      const nextPosition = (currentPosition + 1) % visibleProjects.length;
+      setActiveProject(visibleProjects[nextPosition].index);
     }
   };
   
   const prevProject = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (activeProject !== null) {
-      setActiveProject((activeProject - 1 + projects.length) % projects.length);
+      const currentPosition = visibleProjects.findIndex(({ index }) => index === activeProject);
+      const previousPosition = (currentPosition - 1 + visibleProjects.length) % visibleProjects.length;
+      setActiveProject(visibleProjects[previousPosition].index);
     }
   };
 
   return (
-    <section id="work" className="py-16 md:py-24 px-4 md:px-6 max-w-[1400px] mx-auto bg-background">
+    <section id="work" className="mx-auto max-w-[1400px] bg-background px-4 py-16 md:px-6 md:py-24">
 
-      {/* Editorial Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
-        {projects.map((project, index) => (
-          <motion.div
+      <div className="mb-10 flex flex-col gap-5 border-y border-border py-5 md:mb-14 md:flex-row md:items-center md:justify-between">
+        <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">Filter Projects</p>
+        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
+          {projectCategories.map((category) => {
+            const count = category === "All" ? projects.length : projects.filter((project) => getProjectCategory(project.type) === category).length;
+            const selected = activeCategory === category;
+            return (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setActiveCategory(category)}
+                aria-pressed={selected}
+                className={`border px-4 py-2.5 font-sans text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors ${
+                  selected
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-background text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                }`}
+              >
+                {category} <span className="ml-1.5 opacity-60">{count}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Editorial project rows */}
+      <div className="space-y-10 md:space-y-14">
+        {visibleProjects.map(({ project, index }, displayIndex) => (
+          <motion.article
             key={project.id}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: index * 0.05 }}
-            className={`${project.span} ${project.aspect} group relative overflow-hidden bg-muted cursor-pointer`}
-            onClick={() => openLightbox(index)}
+            transition={{ duration: 0.8, delay: displayIndex * 0.05 }}
+            className="grid overflow-hidden border border-border bg-background shadow-[0_18px_46px_rgba(15,23,42,0.08)] lg:grid-cols-2"
           >
-            <img 
-              src={project.image} 
-              alt={project.title}
-              loading={index < 2 ? "eager" : "lazy"}
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-            />
-            {/* Hover Overlay */}
-            <div className="absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-              <p className="font-sans text-xs tracking-[0.2em] text-white/65 uppercase mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
-                {project.type}
-              </p>
-              <h3 className="font-display text-2xl md:text-3xl text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                {project.title}
-              </h3>
+            <button
+              type="button"
+              onClick={() => openLightbox(index)}
+              aria-label={`Open details for ${project.title}`}
+              className={`group relative min-h-[300px] overflow-hidden text-left md:min-h-[440px] ${
+                displayIndex % 2 === 1
+                  ? "lg:order-2 lg:[clip-path:polygon(4%_0,100%_0,100%_100%,0_100%)]"
+                  : "lg:[clip-path:polygon(0_0,96%_0,100%_100%,0_100%)]"
+              }`}
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                loading={displayIndex < 2 ? "eager" : "lazy"}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-100" />
+            </button>
+
+            <div className={`flex min-h-[380px] flex-col justify-center p-7 md:p-10 lg:p-12 ${displayIndex % 2 === 1 ? "lg:order-1" : ""}`}>
+              <p className="font-sans text-[10px] font-medium uppercase tracking-[0.28em] text-primary">{project.type}</p>
+              <h2 className="mt-6 max-w-xl font-display text-3xl leading-tight text-foreground md:text-4xl lg:text-5xl">{project.title}</h2>
+              <p className="mt-7 max-w-xl font-sans text-sm leading-7 text-muted-foreground md:text-base">{project.description}</p>
+
+              <div className="mt-9 grid grid-cols-3 border-y border-border py-5">
+                {[
+                  { label: "Cost", value: project.cost },
+                  { label: "Scale", value: project.size },
+                  { label: "Complete", value: project.completed },
+                ].map((stat, statIndex) => (
+                  <div key={stat.label} className={`px-3 first:pl-0 ${statIndex > 0 ? "border-l border-border" : ""}`}>
+                    <p className="font-sans text-[9px] uppercase tracking-[0.24em] text-muted-foreground">{stat.label}</p>
+                    <p className="mt-2 font-sans text-xs font-semibold text-foreground md:text-sm">{stat.value}</p>
+                  </div>
+                ))}
+              </div>
+
+              <button type="button" onClick={() => openLightbox(index)} className="mt-8 inline-flex w-fit items-center gap-2 border-b border-primary/40 pb-1 font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-primary transition-all hover:gap-3 hover:border-primary">
+                Open Project <ArrowUpRight className="h-3.5 w-3.5" />
+              </button>
             </div>
-          </motion.div>
+          </motion.article>
         ))}
       </div>
 
@@ -199,20 +268,20 @@ export function WorkGrid() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0b1020]/88 p-4 backdrop-blur-sm md:p-10"
             onClick={closeLightbox}
           >
             {/* Prev / Next — outside the card */}
             <button
               onClick={prevProject}
-              className="absolute left-4 md:left-6 z-10 w-10 h-10 bg-white/90 hover:bg-white text-foreground rounded-full flex items-center justify-center shadow-md transition-all"
+              className="absolute left-4 z-10 flex h-10 w-10 items-center justify-center border border-white/30 bg-white/90 text-foreground shadow-md transition-all hover:bg-white md:left-6"
               aria-label="Previous project"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextProject}
-              className="absolute right-4 md:right-6 z-10 w-10 h-10 bg-white/90 hover:bg-white text-foreground rounded-full flex items-center justify-center shadow-md transition-all"
+              className="absolute right-4 z-10 flex h-10 w-10 items-center justify-center border border-white/30 bg-white/90 text-foreground shadow-md transition-all hover:bg-white md:right-6"
               aria-label="Next project"
             >
               <ChevronRight className="w-5 h-5" />
@@ -224,57 +293,44 @@ export function WorkGrid() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-white rounded-2xl overflow-hidden max-w-4xl w-full shadow-2xl"
+              className="grid max-h-[90vh] w-full max-w-6xl overflow-y-auto border border-white/20 bg-background shadow-[0_36px_100px_rgba(0,0,0,0.45)] md:grid-cols-[1.18fr_0.82fr] md:overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Image */}
-              <div className="relative aspect-[16/7] overflow-hidden">
+              <div className="relative min-h-[260px] overflow-hidden border-b border-border md:min-h-[620px] md:border-b-0 md:border-r">
                 <img
                   src={projects[activeProject].image}
                   alt={projects[activeProject].title}
-                  className="w-full h-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+              </div>
+
+              <div className="relative flex min-h-[520px] flex-col p-7 md:min-h-[620px] md:p-10 lg:p-12">
                 <button
                   onClick={closeLightbox}
-                  className="absolute top-4 right-4 w-9 h-9 bg-white/15 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/25 transition-colors"
+                  className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center border border-border bg-background text-foreground transition-colors hover:border-primary hover:text-primary md:right-6 md:top-6"
+                  aria-label="Close project details"
                 >
                   <X className="w-4 h-4" />
                 </button>
-                <div className="absolute bottom-5 left-7">
-                  <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-white/65 mb-1">
-                    {projects[activeProject].type}
-                  </p>
-                  <h3 className="font-display text-2xl md:text-3xl text-white">
-                    {projects[activeProject].title}
-                  </h3>
-                </div>
-              </div>
 
-              {/* Details */}
-              <div className="p-7 md:p-10">
-                <p className="font-sans text-muted-foreground leading-relaxed mb-8 text-sm md:text-base">
+                <p className="pr-12 font-sans text-[10px] font-medium uppercase tracking-[0.28em] text-primary">{projects[activeProject].type}</p>
+                <h3 className="mt-7 font-display text-3xl leading-tight text-foreground md:text-4xl lg:text-5xl">{projects[activeProject].title}</h3>
+                <p className="mt-8 font-sans text-sm leading-7 text-muted-foreground md:text-base">
                   {projects[activeProject].description}
                 </p>
-                <div className="grid grid-cols-3 gap-4 border-t border-border pt-7">
+
+                <div className="mt-auto pt-10">
                   {[
                     { label: "Cost", value: projects[activeProject].cost },
-                    { label: "Size", value: projects[activeProject].size },
+                    { label: "Scale", value: projects[activeProject].size },
                     { label: "Completed", value: projects[activeProject].completed },
                   ].map((stat) => (
-                    <div key={stat.label}>
-                      <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-1">{stat.label}</p>
-                      <p className="font-sans text-sm font-medium text-foreground">{stat.value}</p>
+                    <div key={stat.label} className="grid grid-cols-[100px_1fr] items-center border-t border-border py-4 last:border-b">
+                      <p className="font-sans text-[9px] uppercase tracking-[0.25em] text-muted-foreground">{stat.label}</p>
+                      <p className="font-sans text-sm font-semibold text-foreground">{stat.value}</p>
                     </div>
                   ))}
-                </div>
-                <div className="mt-6 pt-6 border-t border-border flex justify-end">
-                  <button
-                    onClick={closeLightbox}
-                    className="font-sans text-xs tracking-[0.18em] uppercase text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Close
-                  </button>
                 </div>
               </div>
             </motion.div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { BrandMark } from "@/components/BrandMark";
 
 const navLinks = [
   { name: "Our Work", href: "/work" },
@@ -47,8 +48,12 @@ export function Nav() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${navBg}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <Link href="/">
-            <span className={`font-display text-xl tracking-widest uppercase cursor-pointer transition-colors duration-300 ${logoColor}`}>
-              LAI GROUP
+            <span className={`flex cursor-pointer items-center gap-3 font-sans transition-colors duration-300 ${logoColor}`}>
+              <BrandMark className="h-10 w-10 shrink-0 drop-shadow-[0_5px_12px_rgba(0,0,0,0.16)]" />
+              <span className="flex flex-col leading-none">
+                <span className="text-xl font-semibold tracking-[-0.075em]">LAI</span>
+                <span className="-mt-1 text-sm font-semibold tracking-[-0.075em]">Design Associates</span>
+              </span>
             </span>
           </Link>
 
@@ -57,7 +62,7 @@ export function Nav() {
               const active = location === link.href;
               return (
                 <Link key={link.name} href={link.href}>
-                  <span className={`font-sans text-[11px] tracking-[0.18em] uppercase cursor-pointer transition-colors duration-300 relative pb-1 ${linkColor} ${active ? "after:scale-x-100" : "after:scale-x-0"} after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-current after:transition-transform after:duration-300 after:origin-left hover:after:scale-x-100`}>
+                  <span className={`relative cursor-pointer pb-1 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors duration-300 ${linkColor} ${active ? "after:scale-x-100" : "after:scale-x-0"} after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:content-[''] hover:after:scale-x-100`}>
                     {link.name}
                   </span>
                 </Link>
@@ -93,7 +98,13 @@ export function Nav() {
               <X className="w-7 h-7" />
             </button>
             <div className="absolute top-7 left-6">
-              <span className="font-display text-xl tracking-widest uppercase text-foreground">LAI GROUP</span>
+              <span className="flex items-center gap-3 font-sans text-foreground">
+                <BrandMark className="h-9 w-9 shrink-0" />
+                <span className="flex flex-col leading-none">
+                  <span className="text-xl font-semibold tracking-[-0.075em]">LAI</span>
+                  <span className="-mt-1 text-sm font-semibold tracking-[-0.075em]">Design Associates</span>
+                </span>
+              </span>
             </div>
             <div className="flex flex-col items-center space-y-10">
               {navLinks.map((link, i) => (
@@ -104,7 +115,7 @@ export function Nav() {
                   transition={{ delay: i * 0.07 }}
                 >
                   <Link href={link.href}>
-                    <span className="font-display text-4xl tracking-widest uppercase text-foreground hover:text-primary transition-colors cursor-pointer">
+                    <span className="cursor-pointer font-sans text-3xl font-semibold uppercase tracking-[0.08em] text-foreground transition-colors hover:text-primary">
                       {link.name}
                     </span>
                   </Link>

@@ -13,11 +13,15 @@ export default function AboutPage() {
 
       <Nav />
 
-      <div className="pt-28 pb-0 px-6 bg-background max-w-7xl mx-auto">
-        <p className="font-sans text-[11px] tracking-[0.35em] uppercase text-muted-foreground mb-3">Who We Are</p>
-        <h1 className="font-display text-5xl md:text-6xl text-foreground">About LAI Group</h1>
-        <div className="w-14 h-[1px] bg-primary mt-6" />
-      </div>
+      <header className="border-b border-border bg-background px-6 pb-12 pt-32 md:pb-16">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:items-end">
+          <div>
+            <p className="font-sans text-[11px] uppercase tracking-[0.35em] text-muted-foreground">Who We Are</p>
+            <div className="mt-5 h-px w-14 bg-primary" />
+          </div>
+          <h1 className="font-display text-5xl leading-none text-foreground md:text-6xl">About LAI Group</h1>
+        </div>
+      </header>
 
       <AboutUs />
 

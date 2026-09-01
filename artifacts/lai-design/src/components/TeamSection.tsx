@@ -90,9 +90,6 @@ export function TeamSection() {
                     <h3 className="font-display text-2xl text-white mb-1">{person.name}</h3>
                     <p className="font-sans text-xs text-primary tracking-widest uppercase">{person.role}</p>
                   </div>
-                  <div className="absolute top-6 right-6 w-9 h-9 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md">
-                    <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-                  </div>
                 </div>
 
                 {/* BACK: Inspirations Collage */}
@@ -118,22 +115,24 @@ export function TeamSection() {
                 </div>
 
               </div>
-              <div className="mt-4 border border-border bg-card/90 p-4 shadow-lg shadow-black/10">
-                <h3 className="font-display text-xl text-foreground">{person.name}</h3>
-                <p className="font-sans text-xs text-primary tracking-widest uppercase">{person.role}</p>
-                <div className="mt-4 grid gap-2">
+              <div className="mt-4 overflow-hidden border border-border bg-card/90 shadow-lg shadow-black/10">
+                <div className="p-4">
+                  <h3 className="font-display text-xl text-foreground">{person.name}</h3>
+                  <p className="font-sans text-xs text-primary tracking-widest uppercase">{person.role}</p>
+                </div>
+                <div className="border-t border-border">
                   <a
                     href={`mailto:${person.email}`}
-                    className="inline-flex items-center gap-2 font-sans text-sm text-foreground transition-colors hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="group/contact flex w-full items-center gap-3 px-4 py-4 font-sans text-sm font-medium text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
                   >
-                    <Mail className="h-4 w-4 flex-shrink-0 text-primary" aria-hidden="true" />
+                    <Mail className="h-4 w-4 flex-shrink-0 text-primary transition-colors group-hover/contact:text-primary-foreground" aria-hidden="true" />
                     <span className="truncate">{person.email}</span>
                   </a>
                   <a
                     href={`tel:${person.phone.replace(/[^0-9+]/g, "")}`}
-                    className="inline-flex items-center gap-2 font-sans text-sm text-muted-foreground transition-colors hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="group/contact flex w-full items-center gap-3 border-t border-border px-4 py-4 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
                   >
-                    <Phone className="h-4 w-4 flex-shrink-0 text-primary" aria-hidden="true" />
+                    <Phone className="h-4 w-4 flex-shrink-0 text-primary transition-colors group-hover/contact:text-primary-foreground" aria-hidden="true" />
                     <span>{person.phone}</span>
                   </a>
                 </div>

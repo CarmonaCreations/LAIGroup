@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { CircleCheck } from "lucide-react";
 
 const values = [
   {
@@ -15,21 +16,23 @@ const values = [
   }
 ];
 
+const workflow = ["Listen", "Study", "Coordinate", "Document", "Support"];
+
 export function AboutUs() {
   return (
     <section id="studio" className="py-16 md:py-24 px-4 md:px-6 bg-background">
       <div className="max-w-7xl mx-auto">
 
         {/* Mission */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 mb-28 md:mb-40 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.72fr_1.28fr] gap-10 lg:gap-20 mb-24 md:mb-32 items-start">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9 }}
           >
-            <h2 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-8">Our Mission</h2>
-            <div className="w-16 h-[1px] bg-primary mb-10" />
+            <h2 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-7">Our Mission</h2>
+            <div className="w-16 h-[1px] bg-primary" />
           </motion.div>
 
           <motion.div
@@ -38,11 +41,44 @@ export function AboutUs() {
             viewport={{ once: true }}
             transition={{ duration: 0.9, delay: 0.15 }}
           >
-            <p className="font-sans text-muted-foreground leading-[1.9] text-lg">
+            <p className="max-w-3xl font-sans text-muted-foreground leading-[1.85] text-base md:text-lg">
               To be the leading provider of superior design and construction services by consistently improving the quality of our product; to add value for clients through innovation, prudence, integrity, and aggressive performance; and to serve with character and purpose that builds enduring client relationships.
             </p>
           </motion.div>
         </div>
+
+        {/* Workflow */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.75 }}
+          className="mb-28 border-y border-border py-10 md:py-12"
+        >
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_2.2fr] lg:items-center lg:gap-12">
+            <div className="max-w-sm">
+              <p className="mb-4 font-sans text-[11px] font-semibold uppercase tracking-[0.34em] text-primary">Workflow</p>
+              <h3 className="font-display text-3xl leading-tight text-foreground md:text-4xl">A direct path through complex work.</h3>
+            </div>
+
+            <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 xl:grid-cols-5">
+              {workflow.map((step, index) => (
+                <motion.div
+                  key={step}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  className="group bg-background p-5 transition-all duration-300 hover:relative hover:z-10 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(15,23,42,0.1)]"
+                >
+                  <CircleCheck className="mb-7 h-5 w-5 text-primary" strokeWidth={1.8} aria-hidden="true" />
+                  <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">Step {index + 1}</p>
+                  <p className="mt-2 font-sans text-sm font-semibold text-foreground">{step}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
         {/* Core Values heading */}
         <motion.div
@@ -65,7 +101,7 @@ export function AboutUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.7, delay: i * 0.15 }}
-              className="bg-background p-10 md:p-12 group hover:bg-card transition-colors duration-500"
+              className="bg-background p-10 md:p-12 group hover:bg-card transition-colors duration-500 flex flex-col"
             >
               <div className="w-8 h-[2px] bg-primary mb-8 group-hover:w-16 transition-all duration-500" />
               <h4 className="font-display text-xl text-foreground mb-6 tracking-wide">{value.title}</h4>

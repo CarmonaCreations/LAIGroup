@@ -46,7 +46,27 @@ export function SiteFooter() {
 
         </div>
 
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-y border-border py-7 mb-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-[1.4fr_3fr] md:gap-12">
+            <p className="font-sans text-xs tracking-[0.25em] uppercase text-muted-foreground">Licensing</p>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-3 lg:grid-cols-5">
+              {[
+                { state: "FL", licenses: "#CA-28421  #AR95581" },
+                { state: "LA", licenses: "#AF0841" },
+                { state: "NC", licenses: "#53876" },
+                { state: "SC", licenses: "#101758" },
+                { state: "TN", licenses: "#5482" },
+              ].map((license) => (
+                <div key={license.state}>
+                  <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground mb-1.5">{license.state}</p>
+                  <p className="font-sans text-xs leading-relaxed text-muted-foreground">{license.licenses}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="pt-0 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-4">
             <a href="https://www.instagram.com/laigroupfl/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-muted-foreground hover:text-foreground transition-colors">
               <Instagram className="w-4 h-4" />

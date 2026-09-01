@@ -6,7 +6,6 @@ import { ArrowRight, X } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { SiteFooter } from "@/components/SiteFooter";
-import { TimeLapse } from "@/components/TimeLapse";
 import { LicensureMap } from "@/components/LicensureMap";
 
 import innovationPrep from "@assets/Innovation-Preparatory-Academy_1773411287414.jpg";
@@ -74,11 +73,10 @@ export default function Home() {
       <Nav />
       <Hero />
 
-      {/* Timelapse */}
-      <TimeLapse />
+      <main className="flex flex-col">
 
       {/* Services */}
-      <section className="py-24 md:py-32 px-6 bg-background">
+      <section className="order-2 py-24 md:py-32 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -110,11 +108,15 @@ export default function Home() {
         </div>
       </section>
 
-      <LicensureMap />
+      <div className="order-3">
+        <LicensureMap />
+      </div>
 
       {/* Featured Projects */}
-      <section className="py-24 md:py-32 px-6 bg-muted">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative order-1 overflow-hidden bg-[linear-gradient(145deg,#f7f9fb_0%,#ffffff_48%,#f1f4f7_100%)] px-6 py-24 shadow-[inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-12px_30px_rgba(15,23,42,0.025)] md:py-32">
+        <div className="pointer-events-none absolute -left-36 top-16 h-96 w-96 rounded-full bg-white/70 blur-3xl" />
+        <div className="pointer-events-none absolute -right-40 bottom-0 h-[30rem] w-[30rem] rounded-full bg-slate-300/15 blur-3xl" />
+        <div className="relative z-10 max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-14">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -132,7 +134,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
             {featured.map((project, i) => (
               <motion.div
                 key={project.title}
@@ -140,7 +142,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.1 }}
-                className="group relative overflow-hidden aspect-[4/3] bg-muted cursor-pointer"
+                className="group relative aspect-[4/3] cursor-pointer overflow-hidden bg-muted ring-1 ring-black/5 shadow-[8px_8px_0_rgba(52,80,164,0.09),0_16px_34px_rgba(15,23,42,0.1)] transition-[transform,box-shadow] duration-500 hover:-translate-x-1 hover:-translate-y-2 hover:shadow-[12px_14px_0_rgba(52,80,164,0.12),0_26px_52px_rgba(15,23,42,0.14)]"
                 onClick={() => setActiveProject(i)}
               >
                 <img
@@ -247,7 +249,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* About Teaser */}
-      <section className="py-24 md:py-32 px-6 bg-background">
+      <section className="order-4 py-24 md:py-32 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -293,6 +295,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <SiteFooter />
     </>
